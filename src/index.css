@@ -1,0 +1,8 @@
+@import "tailwindcss";
+.container{
+    width: 95%;
+    margin: auto;
+}
+body{
+    background-color: rgb(226, 218, 218);
+}
