@@ -61,7 +61,7 @@ const HeroLayout = () => {
 
         {/* RIGHT PROMOS */}
         <aside className="hidden lg:flex flex-col gap-4">
-          <div className="bg-image h-[130px] rounded-xl flex justify-end">
+          <div className="bg-image h-32.5 rounded-xl flex justify-end">
             <div className="p-4 text-right">
               <p>Explore Our</p>
               <h4 className="text-2xl font-bold">Gadget</h4>
@@ -71,7 +71,7 @@ const HeroLayout = () => {
             </div>
           </div>
 
-          <div className="hero-bg-image h-[130px] rounded-xl flex justify-start">
+          <div className="hero-bg-image h-32.5 rounded-xl flex justify-start">
             <div className="p-4">
               <p className="text-white">Get Here</p>
               <h4 className="text-xl text-white font-bold">Most Have</h4>
