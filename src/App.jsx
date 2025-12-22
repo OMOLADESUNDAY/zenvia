@@ -4,6 +4,7 @@ import SearchNav from './components/common/SearchNav'
 import Home from './pages/public/Home'
 
 
+
 function App() {
 
   return (

@@ -1,4 +1,84 @@
-.top-right-hero{
-    width: 20% !important;
-    background: url('../assets/heroo.png'), center, cover;
+.bg-image {
+  background-image: url("../assets/heroo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+.hero-bg-image{
+      background-image: url("../assets/blk camera.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+.slick-prev,
+.slick-next {
+  width: 40px !important;
+  height: 40px !important;
+  /* background: rgba(255, 255, 255, 0.9) !important; */
+  border-radius: 50% !important;
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important; */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 10 !important;
+  transition: all 0.3s ease !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background: white !important;
+}
+
+/* Left arrow position */
+.slick-prev {
+  left: 15px !important;
+}
+
+/* Right arrow position */
+.slick-next {
+  right: 15px !important;
+}
+
+/* Arrow icon styles - CRITICAL FIX */
+.slick-prev:before,
+.slick-next:before {
+  font-family: 'slick' !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  color: #333 !important;
+  opacity: 1 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Specific left arrow icon */
+.slick-prev:before {
+  content: '←' !important;
+}
+
+/* Specific right arrow icon */
+.slick-next:before {
+  content: '→' !important;
+}
+
+/* Make sure slider container allows arrows to show */
+.slick-slider {
+  position: relative;
+}
+
+/* Ensure arrows are above slides */
+.slick-list {
+  overflow: hidden;
+}
+
+/* Optional: Hide arrows when not hovering */
+.slick-slider:not(:hover) .slick-prev,
+.slick-slider:not(:hover) .slick-next {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.slick-slider:hover .slick-prev,
+.slick-slider:hover .slick-next {
+  opacity: 1;
 }

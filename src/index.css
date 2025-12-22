@@ -6,3 +6,18 @@
 body{
     background-color: rgb(226, 218, 218);
 }
+.slick-slider {
+  width: 100%;
+}
+
+.slick-list {
+  overflow: hidden;
+}
+
+.slick-track {
+  display: flex;
+}
+
+.slick-slide > div {
+  width: 100%;
+}

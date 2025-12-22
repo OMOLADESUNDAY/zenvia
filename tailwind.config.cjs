@@ -59,6 +59,12 @@ export default {
       },
     },
   },
+    extend: {
+    backgroundImage: {
+      hero: "url('/src/assets/hero-bg.png')",
+    },
+  },
+
 
   plugins: [],
 };
