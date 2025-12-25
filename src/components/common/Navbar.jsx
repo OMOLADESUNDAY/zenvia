@@ -57,7 +57,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
-import CurrencySwitcher from "./currencySwitcher";
+import CurrencySwitcher from "./CurrencySwitcher";
 import logo from "/Zenvia.webp";
 import { ChevronDown, Menu, X, User, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
