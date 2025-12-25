@@ -49,7 +49,7 @@ const HeroLayout = () => {
           <Slider {...settings}>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-1">
               <div className="w-3/5 p-8">
-                     <h1 className="text-md">The Future in Your Hands</h1>
+                     <h1 className="text-md font-bold">The Future in Your Hands</h1>
                     <p className="pb-4 text-sm">Discover cutting-edge tech that transforms your everyday.</p>
                     <Link className="btn">Shop Tech Now</Link>
               </div>
@@ -57,17 +57,17 @@ const HeroLayout = () => {
             </div>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-2">
               <div className="w-3/5 p-8">
-                    <h1 className="text-md">Style That Speaks for You</h1>
+                    <h1 className="text-md font-bold">Style That Speaks for You</h1>
                     <p className="pb-4 text-sm">Curate your perfect look with the latest trends and timeless classics. </p>
-                    <Link className="btn">Explore Collection</Link>
+                    <Link className="btn">Explore </Link>
               </div>
              
             </div>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-3">
               <div className="w-3/5 p-8">
-                   <h1 className="text-md"> Fresh Delivered to Your Door</h1>
+                   <h1 className="text-md font-bold"> Fresh Delivered to Your Door</h1>
                   <p className="pb-4 text-sm">Quality ingredients and everyday essentials at your fingertips.</p>
-                  <Link className="btn">Start Shopping</Link>
+                  <Link className="btn">Shop Now</Link>
               </div>
             
             </div>
