@@ -51,7 +51,7 @@ const HeroLayout = () => {
               <div className="w-3/5 p-8">
                      <h1 className="text-md font-bold">The Future in Your Hands</h1>
                     <p className="pb-4 text-sm">Discover cutting-edge tech that transforms your everyday.</p>
-                    <Link className="btn">Shop Tech Now</Link>
+                    <Link className="btn">Buy Now</Link>
               </div>
           
             </div>
