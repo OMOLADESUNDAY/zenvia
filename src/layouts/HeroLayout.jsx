@@ -48,25 +48,25 @@ const HeroLayout = () => {
         <main className="lg:col-span-3 w-full overflow-hidden rounded-md relative ">
           <Slider {...settings}>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-1">
-              <div className="w-2/5 p-8">
-                     <h1 className="text-3xl">The Future in Your Hands</h1>
-                    <p className="pb-4">Discover cutting-edge tech that transforms your everyday.</p>
+              <div className="w-3/5 p-8">
+                     <h1 className="text-md">The Future in Your Hands</h1>
+                    <p className="pb-4 text-sm">Discover cutting-edge tech that transforms your everyday.</p>
                     <Link className="btn">Shop Tech Now</Link>
               </div>
           
             </div>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-2">
-              <div className="w-2/5 p-8">
-                    <h1 className="text-3xl">Style That Speaks for You</h1>
-                    <p className="pb-4">Curate your perfect look with the latest trends and timeless classics. </p>
+              <div className="w-3/5 p-8">
+                    <h1 className="text-md">Style That Speaks for You</h1>
+                    <p className="pb-4 text-sm">Curate your perfect look with the latest trends and timeless classics. </p>
                     <Link className="btn">Explore Collection</Link>
               </div>
              
             </div>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-3">
-              <div className="w-2/5 p-8">
-                   <h1 className="text-3xl"> Fresh Delivered to Your Door</h1>
-                  <p className="pb-4">Quality ingredients and everyday essentials at your fingertips.</p>
+              <div className="w-3/5 p-8">
+                   <h1 className="text-md"> Fresh Delivered to Your Door</h1>
+                  <p className="pb-4 text-sm">Quality ingredients and everyday essentials at your fingertips.</p>
                   <Link className="btn">Start Shopping</Link>
               </div>
             
