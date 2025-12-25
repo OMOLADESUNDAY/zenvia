@@ -21,3 +21,9 @@ body{
 .slick-slide > div {
   width: 100%;
 }
+.btn{
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
+  background-color: var(--color-green-500);
+  color:white;
+}

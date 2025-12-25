@@ -7,7 +7,7 @@ import "./herolayout.css";
 
 const HeroLayout = () => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -45,16 +45,31 @@ const HeroLayout = () => {
         </aside>
 
         {/* CENTER SLIDER */}
-        <main className="lg:col-span-3 w-full overflow-hidden rounded-md border relative">
+        <main className="lg:col-span-3 w-full overflow-hidden rounded-md relative ">
           <Slider {...settings}>
-            <div className="h-60 bg-red-500 flex items-center rounded-2xl justify-center">
-              Slide 1
+            <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-1">
+              <div className="w-2/5 p-8">
+                     <h1 className="text-3xl">The Future in Your Hands</h1>
+                    <p className="pb-4">Discover cutting-edge tech that transforms your everyday.</p>
+                    <Link className="btn">Shop Tech Now</Link>
+              </div>
+          
             </div>
-            <div className="h-60 bg-blue-500 flex items-center rounded-2xl justify-center">
-              Slide 2
+            <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-2">
+              <div className="w-2/5 p-8">
+                    <h1 className="text-3xl">Style That Speaks for You</h1>
+                    <p className="pb-4">Curate your perfect look with the latest trends and timeless classics. </p>
+                    <Link className="btn">Explore Collection</Link>
+              </div>
+             
             </div>
-            <div className="h-60 bg-green-500 flex items-center rounded-2xl justify-center">
-              Slide 3
+            <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-3">
+              <div className="w-2/5 p-8">
+                   <h1 className="text-3xl"> Fresh Delivered to Your Door</h1>
+                  <p className="pb-4">Quality ingredients and everyday essentials at your fingertips.</p>
+                  <Link className="btn">Start Shopping</Link>
+              </div>
+            
             </div>
           </Slider>
         </main>

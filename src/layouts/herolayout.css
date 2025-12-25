@@ -10,6 +10,24 @@
   background-repeat: no-repeat;
   background-size: cover; 
 }
+.hero-slide-1{
+  background-image: url("../assets/bg-hero slide.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+.hero-slide-2{
+  background-image: url("../assets/bg-hero slide (1).png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+.hero-slide-3{
+  background-image: url("../assets/bg-hero slide (2).png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
 .slick-prev,
 .slick-next {
   width: 40px !important;
