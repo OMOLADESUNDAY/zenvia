@@ -28,6 +28,18 @@
   background-repeat: no-repeat;
   background-size: cover; 
 }
+.ps5{
+    background-image: url("../assets/ps5.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+.keyboard{
+    background-image: url("../assets/keyboard.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
 .slick-prev,
 .slick-next {
   width: 40px !important;
