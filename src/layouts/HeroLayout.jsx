@@ -81,7 +81,7 @@ const HeroLayout = () => {
                   </Link>
                 </div>
               </div>
-              <div className="keyboard h-30 rounded-xl  w-1/2  ">
+              <div className="keyboard h-30 rounded-xl  w-full lg:w-1/2  ">
                 <div className="p-4 text-left">
                   <small className="text-xl font-bold">best for a devices</small><br />
                   <Link className="inline-block mt-2  ">
