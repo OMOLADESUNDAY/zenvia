@@ -14,7 +14,7 @@ const SearchNav = () => {
                 <option value="Clothes">Clothes</option>
                 <option value="Shoes">Shoes</option>
             </select>
-            <input type="search" name="" className='p-1 text-sm w-40' placeholder='Search Anything' id="" />
+            <input type="search" name="" className='p-1 text-sm ' placeholder='Search Anything' id="" />
             <Search size={18} className='text-black '/>
         </div>
         <div className='hidden lg:block'><p className='text-white '>FREE SHIPPING OVER $199</p></div>
