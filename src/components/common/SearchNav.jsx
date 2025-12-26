@@ -6,7 +6,7 @@ const SearchNav = () => {
     <div className='p-4 bg-green-500 '>
       <section className='container border flex items-center justify-center lg:justify-between'>
             <div className='flex items-center bg-white rounded-3xl pl-4 pr-4 pt-2 pb-2 w-full '> 
-            <select name="All Categories" id="" className='mr-3'>
+            <select name="All Categories" id="" className=' text-sm'>
                <option value="All Categories">All Categories</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Phones">Phones</option>
@@ -14,7 +14,7 @@ const SearchNav = () => {
                 <option value="Clothes">Clothes</option>
                 <option value="Shoes">Shoes</option>
             </select>
-            <input type="search" name="" className='p-1' placeholder='Search Anything' id="" />
+            <input type="search" name="" className='p-1 text-sm' placeholder='Search Anything' id="" />
             <Search size={18}/>
         </div>
         <div className='hidden lg:block'><p className='text-white '>FREE SHIPPING OVER $199</p></div>
