@@ -72,7 +72,7 @@ const HeroLayout = () => {
             </div>
           </Slider>
 
-          <div className="down-hero flex gap-1 mt-2">
+          <div className="down-hero flex flex-col lg:flex-row gap-1 mt-2">
                 <div className="ps5 h-30 rounded-xl w-1/2 ">
                 <div className="p-4 text-left">
                  <small className="text-xl font-bold">Sony PS5</small><br />
