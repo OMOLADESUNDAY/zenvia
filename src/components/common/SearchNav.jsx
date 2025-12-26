@@ -5,7 +5,7 @@ const SearchNav = () => {
   return (
     <div className='p-4 bg-green-500 '>
       <section className='container flex items-center justify-center lg:justify-between'>
-            <div className='flex items-center bg-white rounded-3xl px-4 py-2 w-full overflow-hidden'> 
+            <div className='flex items-center bg-white rounded-3xl px-4 py-2 w-full overflow-hidden lg:w-fit'> 
             <select name="All Categories" id="" className=' text-sm flex-shrink-0'>
                <option value="All_categories">All Categories</option>
                 <option value="Electronics">Electronics</option>

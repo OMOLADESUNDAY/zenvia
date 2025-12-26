@@ -26,7 +26,6 @@ const HeroLayout = () => {
   return (
 
     <section className="mt-5">
-
     <section className="container">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
 
@@ -48,35 +47,56 @@ const HeroLayout = () => {
         <main className="lg:col-span-3 w-full overflow-hidden rounded-md relative ">
           <Slider {...settings}>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-1">
-              <div className="w-3/5 p-8">
-                     <h1 className="text-md font-bold">The Future in Your Hands</h1>
+              <div className="w-3/5 p-8 lg:h-full lg:flex lg:flex-col lg:justify-center">
+                     <h1 className="text-md font-bold lg:text-3xl ">The Future in Your Hands</h1>
                     <p className="pb-4 text-sm">Discover cutting-edge tech that transforms your everyday.</p>
-                    <Link className="btn">Buy Now</Link>
+                    <Link className="btn lg:w-fit">Buy Now</Link>
               </div>
           
             </div>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-2">
-              <div className="w-3/5 p-8">
-                    <h1 className="text-md font-bold">Style That Speaks for You</h1>
+              <div className="w-3/5 p-8 lg:h-full  lg:flex lg:flex-col lg:justify-center" >
+                    <h1 className="text-md font-bold lg:text-3xl">Style That Speaks for You</h1>
                     <p className="pb-4 text-sm">Curate your perfect look with the latest trends and timeless classics. </p>
-                    <Link className="btn">Explore </Link>
+                    <Link className="btn lg:w-fit">Explore </Link>
               </div>
              
             </div>
             <div className="h-60 flex items-center rounded-2xl justify-center hero-slide-3">
-              <div className="w-3/5 p-8">
-                   <h1 className="text-md font-bold"> Fresh Delivered to Your Door</h1>
+              <div className="w-3/5 p-8 lg:h-full lg:flex lg:flex-col lg:justify-center">
+                   <h1 className="text-md font-bold lg:text-3xl "> Fresh Delivered to Your Door</h1>
                   <p className="pb-4 text-sm">Quality ingredients and everyday essentials at your fingertips.</p>
-                  <Link className="btn">Shop Now</Link>
+                  <Link className="btn lg:w-fit">Shop Now</Link>
               </div>
             
             </div>
           </Slider>
+
+          <div className="down-hero flex gap-1 mt-2">
+                <div className="bg-image h-30 rounded-xl w-1/2 ">
+                <div className="p-4 text-right">
+                  <p>Explore Our</p>
+                  <h4 className="text-2xl font-bold">Gadget</h4>
+                  <Link className="inline-block mt-2  text-white ">
+                    Shop Now
+                  </Link>
+                </div>
+              </div>
+              <div className="bg-image h-30 rounded-xl  w-1/2  ">
+                <div className="p-4 text-right">
+                  <p>Explore Our</p>
+                  <h4 className="text-2xl font-bold">Gadget</h4>
+                  <Link className="inline-block mt-2  text-white ">
+                    Shop Now
+                  </Link>
+                </div>
+              </div>
+          </div>
         </main>
 
         {/* RIGHT PROMOS */}
         <aside className="hidden lg:flex flex-col gap-4">
-          <div className="bg-image h-32.5 rounded-xl flex justify-end">
+          <div className="bg-image h-1/2 rounded-xl flex justify-end">
             <div className="p-4 text-right">
               <p>Explore Our</p>
               <h4 className="text-2xl font-bold">Gadget</h4>
@@ -86,7 +106,7 @@ const HeroLayout = () => {
             </div>
           </div>
 
-          <div className="hero-bg-image h-32.5 rounded-xl flex justify-start">
+          <div className="hero-bg-image h-1/2 rounded-xl flex justify-start">
             <div className="p-4">
               <p className="text-white">Get Here</p>
               <h4 className="text-xl text-white font-bold">Most Have</h4>
