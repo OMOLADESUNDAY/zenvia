@@ -43,7 +43,7 @@ const useAxios = ({
   headers = {},
   trigger = 0, // manual refetch trigger
 }) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -75,7 +75,7 @@ const useAxios = ({
           setData(response.data.data ?? response.data);
         }
 
-        console.log("Fetched data:", response.data);
+        console.log("Fetched data:", response.data.data);
       } catch (err) {
         if (!axios.isCancel(err) && isMounted) {
           setError(err.response?.data || err.message);

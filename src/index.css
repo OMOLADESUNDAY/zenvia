@@ -27,3 +27,9 @@ body{
   background-color: var(--color-green-500);
   color:white;
 }
+/* img{
+  object-fit: cover;
+  display: block;
+  height: auto;
+  
+} */
