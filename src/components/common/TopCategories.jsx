@@ -1,7 +1,7 @@
-import React from 'react';
-import useAxios from '../../hooks/useAxios';
-import { Link, Links } from 'react-router-dom';
-import LoadingSpinner from './LoadingSpinner';
+import React from "react";
+import useAxios from "../../hooks/useAxios";
+import { Link } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 const TopCategories = ({ value }) => {
   const url = `${import.meta.env.VITE_BACKEND_URL}/api/categories`;
@@ -13,20 +13,59 @@ const TopCategories = ({ value }) => {
   const limit = value ?? data.length;
 
   return (
-    <section className='w-1/2 bg-white rounded-2xl p-2'>
-      <div className="flex  justify-between text-sm font-bold ">
-        <p>Top Categories</p>
-        <Link className="text-sm">View All</Link>
+    <section
+      className="
+        w-full
+        lg:w-1/2
+        bg-white
+        rounded-2xl
+        p-4
+      "
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3">
+        <p className="font-bold text-sm sm:text-base">
+          Top Categories
+        </p>
+
+        <Link
+          to="/categories"
+          className="text-xs sm:text-sm text-green-600 hover:underline"
+        >
+          View All
+        </Link>
       </div>
-    <div className='flex justify-between items-center h-full '>
-         {data.slice(0, limit).map((item, index) => (
-        <Link key={index}>{item.name}</Link>
-      ))}
-    </div>
-   
+
+      {/* Categories */}
+      <div
+        className="
+          grid gap-2
+          grid-cols-2
+          sm:grid-cols-3
+          md:grid-cols-4
+        "
+      >
+        {data.slice(0, limit).map((item) => (
+          <Link
+            key={item._id}
+            to={`/category/${item.slug ?? item._id}`}
+            className="
+              text-sm
+              bg-gray-100
+              rounded-lg
+              px-3
+              py-2
+              text-center
+              hover:bg-green-100
+              transition
+            "
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
     </section>
   );
 };
-
 
 export default TopCategories;

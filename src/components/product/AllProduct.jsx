@@ -24,54 +24,63 @@ const AllProduct = ({value}) => {
     const limit=value ?? data.length
   return (
 
-    <section className='container'>
-        <div className='flex flex-wrap w-full gap-3 justify-center'>
-        {data.slice(0,limit).map((product)=>{
-            return(
-                <Card sx={{ width: 380 }}>
-      <div>
-        <Typography level="title-lg">{product.name}</Typography>
-        <Typography level="body-sm">{Date()}</Typography>
-        <IconButton
-          aria-label="bookmark Bahamas Islands"
-          variant="plain"
-          color="neutral"
-          size="sm"
-          sx={{ position: 'absolute', top: '0.875rem', right: '0.5rem' }}
-        >
-          <BookmarkAdd />
-        </IconButton>
-      </div>
-      <AspectRatio minHeight="120px" maxHeight="200px">
-        <img
-        className='w-1/2'
-        src={product.images}
-          loading="lazy"
-          alt=""
-          style={{width:'60%', margin:"auto"}}
-        />
-      </AspectRatio>
-      <CardContent orientation="horizontal">
+    <section className="container mx-auto px-4">
+      
+     <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center my-4 sm:my-6 text-green-500 font-bold">
+  Our Products
+</h1>
+  <div className="
+    grid gap-4
+    grid-cols-1
+    sm:grid-cols-2
+    md:grid-cols-3
+    lg:grid-cols-4
+  ">
+    {data.slice(0, limit).map(product => (
+      <Card
+        key={product._id}
+        sx={{ width: "100%", maxWidth: 380, margin: "auto" }}
+      >
         <div>
-          <Typography level="body-xs">Price:</Typography>
-          <Typography sx={{ fontSize: 'lg', fontWeight: 'lg' }}>${product.price}</Typography>
-        </div>
-        <Button
-          variant="solid"
-          size="md"
-          aria-label="Explore Bahamas Islands"
-          sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
-          style={{backgroundColor:"green"}}
-        >
-          Explore
-        </Button>
-      </CardContent>
-    </Card>
-            )
-        })}
-    </div>
+          <Typography level="title-md">{product.name}</Typography>
+          <Typography level="body-sm">
+            {new Date().toLocaleDateString("en-CA")}
+          </Typography>
 
-    </section>
+          <IconButton
+            variant="plain"
+            size="sm"
+            sx={{ position: "absolute", top: 14, right: 8 }}
+          >
+            <BookmarkAdd />
+          </IconButton>
+        </div>
+
+        <AspectRatio ratio="1">
+          <img
+            src={product.images?.[0]}
+            alt={product.name}
+            className="object-contain w-full h-full p-4"
+          />
+        </AspectRatio>
+
+        <CardContent orientation="horizontal">
+          <div>
+            <Typography level="body-xs">Price</Typography>
+            <Typography fontWeight="lg">${product.price}</Typography>
+          </div>
+
+          <Button
+            sx={{ ml: "auto", bgcolor: "#00C950", fontWeight: 600 }}
+          >
+            Buy Now
+          </Button>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</section>
+
     
   )
 }
