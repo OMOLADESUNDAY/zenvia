@@ -8,6 +8,7 @@ import CardContent from '@mui/joy/CardContent';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
 import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
+import { Link } from 'react-router-dom';
 const AllProduct = ({value}) => {
     const url =`${import.meta.env.VITE_BACKEND_URL}/api/product`
     const {data,loading,error}=useAxios({url})
@@ -70,11 +71,11 @@ const AllProduct = ({value}) => {
             <Typography fontWeight="lg">${product.price}</Typography>
           </div>
 
-          <Button
-            sx={{ ml: "auto", bgcolor: "#00C950", fontWeight: 600 }}
+          <Link to={`/single/${product._id}`}
+           className='btn'
           >
             Buy Now
-          </Button>
+          </Link>
         </CardContent>
       </Card>
     ))}

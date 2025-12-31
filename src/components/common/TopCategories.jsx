@@ -64,6 +64,7 @@ const TopCategories = ({ value }) => {
           </Link>
         ))}
       </div>
+      
     </section>
   );
 };

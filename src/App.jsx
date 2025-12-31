@@ -3,7 +3,8 @@ import Navbar from './components/common/Navbar'
 import SearchNav from './components/common/SearchNav'
 import Home from './pages/public/Home'
 import Footer from './components/common/Footer'
-
+import { Route,Routes } from 'react-router-dom'
+import SingleProductPage from './pages/public/SingleProduct'
 
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
     <>
       <Navbar/>
       <SearchNav/>
-      <Home/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/single/:id' element={<SingleProductPage/>}/>
+      </Routes>
       <Footer/>
     </>
   )
