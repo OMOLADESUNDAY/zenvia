@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const SingleProduct = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(product.images);
   const [qty, setQty] = useState(1);
+  const totalPrice = product.price * qty;
 
   return (
     <section className="container mx-auto px-4 py-10">
@@ -48,7 +49,7 @@ const SingleProduct = ({ product }) => {
         <div className="w-full lg:w-1/3">
           <div className="sticky top-24 bg-gray-50 rounded-xl p-6 space-y-4">
 
-            <p className="text-2xl font-bold">${product.price}</p>
+            <p className="text-2xl font-bold">Total Price: ${totalPrice}</p>
 
             <p className="text-green-600 text-sm">✔ In stock</p>
 
