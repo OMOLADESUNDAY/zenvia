@@ -4,6 +4,7 @@ const steps = ["Billing", "Address", "Review"];
 
 export default function Checkout() {
   const [step, setStep] = useState(0);
+  const [touched, setTouched] = useState({});
 
   const [form, setForm] = useState({
     firstName: "",
@@ -27,21 +28,39 @@ export default function Checkout() {
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
   };
 
+  const handleBlur = (e) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
+  const errors = {
+    firstName: !form.firstName && "First name is required",
+    lastName: !form.lastName && "Last name is required",
+    country: !form.country && "Country is required",
+    street: !form.street && "Street address is required",
+    city: !form.city && "City is required",
+    state: !form.state && "State is required",
+    zip: !form.zip && "Zip code is required",
+    phone: !form.phone && "Phone is required",
+    email:
+      !form.email
+        ? "Email is required"
+        : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
+          "Invalid email format",
+  };
+
   const isStepValid = () => {
     if (step === 0) {
       return (
-        form.firstName &&
-        form.lastName &&
-        form.country &&
-        form.city &&
-        form.state &&
-        form.zip &&
-        form.phone &&
-        form.email
+        !errors.firstName &&
+        !errors.lastName &&
+        !errors.country &&
+        !errors.street &&
+        !errors.city &&
+        !errors.state &&
+        !errors.zip &&
+        !errors.phone &&
+        !errors.email
       );
-    }
-    if (step === 1) {
-      return form.street;
     }
     return true;
   };
@@ -64,17 +83,110 @@ export default function Checkout() {
         {/* STEP 1 */}
         {step === 0 && (
           <div className="grid md:grid-cols-2 gap-4">
-            <Input required label="First Name" name="firstName" onChange={handleChange} />
-            <Input required label="Last Name" name="lastName" onChange={handleChange} />
-            <Input label="Company Name (Optional)" name="company" onChange={handleChange} />
-            <Select required label="Country / Region" name="country" onChange={handleChange} />
-            <Input required label="Street Address" name="street" onChange={handleChange} />
-            <Input label="Apartment, suite (Optional)" name="apartment" onChange={handleChange} />
-            <Input required label="Town / City" name="city" onChange={handleChange} />
-            <Input required label="State / County" name="state" onChange={handleChange} />
-            <Input required label="Zip / Postal Code" name="zip" onChange={handleChange} />
-            <Input required label="Phone" name="phone" />
-            <Input required label="Email Address" name="email" type="email" />
+            <Input
+              required
+              label="First Name"
+              name="firstName"
+              value={form.firstName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.firstName && errors.firstName}
+            />
+
+            <Input
+              required
+              label="Last Name"
+              name="lastName"
+              value={form.lastName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.lastName && errors.lastName}
+            />
+
+            <Input
+              label="Company Name (Optional)"
+              name="company"
+              value={form.company}
+              onChange={handleChange}
+            />
+
+            <Select
+              required
+              label="Country / Region"
+              name="country"
+              value={form.country}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.country && errors.country}
+            />
+
+            <Input
+              required
+              label="Street Address"
+              name="street"
+              value={form.street}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.street && errors.street}
+            />
+
+            <Input
+              label="Apartment, suite (Optional)"
+              name="apartment"
+              value={form.apartment}
+              onChange={handleChange}
+            />
+
+            <Input
+              required
+              label="Town / City"
+              name="city"
+              value={form.city}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.city && errors.city}
+            />
+
+            <Input
+              required
+              label="State / County"
+              name="state"
+              value={form.state}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.state && errors.state}
+            />
+
+            <Input
+              required
+              label="Zip / Postal Code"
+              name="zip"
+              value={form.zip}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.zip && errors.zip}
+            />
+
+            <Input
+              required
+              label="Phone"
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.phone && errors.phone}
+            />
+
+            <Input
+              required
+              label="Email Address"
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.email && errors.email}
+            />
           </div>
         )}
 
@@ -84,12 +196,14 @@ export default function Checkout() {
             <Textarea
               label="Additional Information (Optional)"
               name="notes"
+              value={form.notes}
               onChange={handleChange}
             />
 
             <Checkbox
               label="Create an account?"
               name="createAccount"
+              checked={form.createAccount}
               onChange={handleChange}
             />
           </div>
@@ -98,7 +212,6 @@ export default function Checkout() {
         {/* STEP 3 */}
         {step === 2 && (
           <div className="grid md:grid-cols-2 gap-6">
-            {/* ORDER SUMMARY */}
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-4">Your Order</h3>
               <div className="flex justify-between text-sm mb-2">
@@ -111,7 +224,6 @@ export default function Checkout() {
               </div>
             </div>
 
-            {/* PAYMENT */}
             <div className="border rounded-lg p-4 space-y-3">
               <h3 className="font-semibold">Payment Method</h3>
 
@@ -164,7 +276,7 @@ export default function Checkout() {
 
 /* ---------- REUSABLE UI ---------- */
 
-function Input({ label, required, ...props }) {
+function Input({ label, required, error, ...props }) {
   return (
     <div>
       <label className="text-sm font-medium">
@@ -172,13 +284,16 @@ function Input({ label, required, ...props }) {
       </label>
       <input
         {...props}
-        className="mt-1 w-full border rounded px-3 py-2 text-sm focus:ring-1 focus:ring-green-500"
+        className={`mt-1 w-full border rounded px-3 py-2 text-sm focus:ring-1 ${
+          error ? "border-red-500" : "focus:ring-green-500"
+        }`}
       />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 }
 
-function Select({ label, required, ...props }) {
+function Select({ label, required, error, ...props }) {
   return (
     <div>
       <label className="text-sm font-medium">
@@ -186,13 +301,16 @@ function Select({ label, required, ...props }) {
       </label>
       <select
         {...props}
-        className="mt-1 w-full border rounded px-3 py-2 text-sm"
+        className={`mt-1 w-full border rounded px-3 py-2 text-sm ${
+          error ? "border-red-500" : ""
+        }`}
       >
         <option value="">Select</option>
         <option>United States</option>
         <option>United Kingdom</option>
         <option>Canada</option>
       </select>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 }
