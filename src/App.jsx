@@ -9,6 +9,9 @@ import About from './pages/public/About'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Checkout from './pages/user/Checkout'
+import Cart from './pages/public/Cart'
+import AccountInfo from './pages/user/Profile'
+import ContactPage from './pages/public/Contact'
 
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/profile' element={<AccountInfo/>}/>
+        <Route path='/contact' element={<ContactPage/>}/>
       </Routes>
       <Footer/>
     </>

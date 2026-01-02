@@ -5,6 +5,33 @@ const SingleProduct = ({ product }) => {
   const [qty, setQty] = useState(1);
   const totalPrice = product.price * qty;
 
+  const payload = {
+  products: [
+    {
+      productId: product._id, 
+      quantity: qty
+    }
+  ]
+};
+
+  const addToCart = async () => {
+  try {
+    const res = await fetch("http://localhost:5000/api/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${token}` // if your API needs auth
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+    console.log("Added to cart:", data);
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+  }
+};
+
   return (
     <section className="container mx-auto px-4 py-10">
       {/* FLEX CONTAINER */}
@@ -71,7 +98,7 @@ const SingleProduct = ({ product }) => {
             </div>
 
             {/* ACTIONS */}
-            <button className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600">
+            <button  onClick={addToCart} className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600">
               Add to Cart
             </button>
 
