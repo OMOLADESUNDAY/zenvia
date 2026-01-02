@@ -73,6 +73,18 @@ const Navbar = () => {
     cart: false,
   });
 
+  const closeMobileMenu = () => {
+  setMobileMenuOpen(false);
+  setMobileDropdownOpen({
+    home: false,
+    pages: false,
+    products: false,
+    user: false,
+    cart: false,
+  });
+};
+
+
   const pagesDropdown = ["About Us", "FAQ", "Team"];
   const productsDropdown = ["Product A", "Product B", "Product C"];
   const homeDropdown = ["Sub Home 1", "Sub Home 2"];
@@ -117,7 +129,7 @@ const Navbar = () => {
                     key={item}
                     className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
                   >
-                    <Link to="/">{item}</Link>
+                    <Link to="/" onClick={closeMobileMenu}>{item}</Link>
                   </li>
                 ))}
               </ul>
@@ -133,7 +145,7 @@ const Navbar = () => {
                     key={page}
                     className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
                   >
-                    <Link to={`/${page.toLowerCase().replace(/\s/g, "")}`}>
+                    <Link onClick={closeMobileMenu} to={`/${page.toLowerCase().replace(/\s/g, "")}`}>
                       {page}
                     </Link>
                   </li>
@@ -151,7 +163,7 @@ const Navbar = () => {
                     key={product}
                     className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
                   >
-                    <Link to={`/${product.toLowerCase().replace(/\s/g, "")}`}>
+                    <Link onClick={closeMobileMenu} to={`/${product.toLowerCase().replace(/\s/g, "")}`}>
                       {product}
                     </Link>
                   </li>
@@ -160,7 +172,7 @@ const Navbar = () => {
             </li>
 
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link onClick={closeMobileMenu} to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
@@ -174,11 +186,11 @@ const Navbar = () => {
             <div>
               <p>Welcome</p>
               <div>
-                <Link to="/login">
+                <Link to="/login" onClick={closeMobileMenu}>
                   <b>Log in</b>
                 </Link>
                 /
-                <Link to="/register">
+                <Link to="/register" onClick={closeMobileMenu}>
                   <b>Register</b>
                 </Link>
               </div>
