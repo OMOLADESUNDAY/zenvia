@@ -129,7 +129,7 @@ const Navbar = () => {
                     key={item}
                     className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
                   >
-                    <Link to="/" onClick={closeMobileMenu}>{item}</Link>
+                    <Link to="/">{item}</Link>
                   </li>
                 ))}
               </ul>
@@ -145,7 +145,7 @@ const Navbar = () => {
                     key={page}
                     className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
                   >
-                    <Link onClick={closeMobileMenu} to={`/${page.toLowerCase().replace(/\s/g, "")}`}>
+                    <Link to={`/${page.toLowerCase().replace(/\s/g, "")}`}>
                       {page}
                     </Link>
                   </li>
@@ -163,7 +163,7 @@ const Navbar = () => {
                     key={product}
                     className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
                   >
-                    <Link onClick={closeMobileMenu} to={`/${product.toLowerCase().replace(/\s/g, "")}`}>
+                    <Link to={`/${product.toLowerCase().replace(/\s/g, "")}`}>
                       {product}
                     </Link>
                   </li>
@@ -172,7 +172,7 @@ const Navbar = () => {
             </li>
 
             <li>
-              <Link onClick={closeMobileMenu} to="/contact">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
@@ -186,11 +186,11 @@ const Navbar = () => {
             <div>
               <p>Welcome</p>
               <div>
-                <Link to="/login" onClick={closeMobileMenu}>
+                <Link to="/login">
                   <b>Log in</b>
                 </Link>
                 /
-                <Link to="/register" onClick={closeMobileMenu}>
+                <Link to="/register">
                   <b>Register</b>
                 </Link>
               </div>
@@ -234,7 +234,7 @@ const Navbar = () => {
                 <ul className="pl-4 mt-1 flex flex-col gap-1">
                   {homeDropdown.map((item) => (
                     <li key={item}>
-                      <Link to="/">{item}</Link>
+                      <Link onClick={closeMobileMenu} to="/">{item}</Link>
                     </li>
                   ))}
                 </ul>
@@ -253,7 +253,7 @@ const Navbar = () => {
                 <ul className="pl-4 mt-1 flex flex-col gap-1">
                   {pagesDropdown.map((page) => (
                     <li key={page}>
-                      <Link to={`/${page.toLowerCase().replace(/\s/g, "")}`}>{page}</Link>
+                      <Link onClick={closeMobileMenu} to={`/${page.toLowerCase().replace(/\s/g, "")}`}>{page}</Link>
                     </li>
                   ))}
                 </ul>
@@ -272,7 +272,7 @@ const Navbar = () => {
                 <ul className="pl-4 mt-1 flex flex-col gap-1">
                   {productsDropdown.map((product) => (
                     <li key={product}>
-                      <Link to={`/${product.toLowerCase().replace(/\s/g, "")}`}>{product}</Link>
+                      <Link onClick={closeMobileMenu} to={`/${product.toLowerCase().replace(/\s/g, "")}`}>{product}</Link>
                     </li>
                   ))}
                 </ul>
@@ -281,7 +281,7 @@ const Navbar = () => {
 
             {/* Contact */}
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link onClick={closeMobileMenu} to="/contact">Contact</Link>
             </li>
 
             {/* User / Login Register */}
@@ -299,10 +299,10 @@ const Navbar = () => {
               {mobileDropdownOpen.user && (
                 <ul className="pl-4 mt-1 flex flex-col gap-1">
                   <li>
-                    <Link to="/login">Log in</Link>
+                    <Link onClick={closeMobileMenu} to="/login">Log in</Link>
                   </li>
                   <li>
-                    <Link to="/register">Register</Link>
+                    <Link onClick={closeMobileMenu} to="/register">Register</Link>
                   </li>
                 </ul>
               )}
