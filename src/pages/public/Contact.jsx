@@ -39,7 +39,7 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Side - Contact Form */}
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+            <h2 className="text-2xl md:text-3xl font-bold text-green-800 mb-2">
               Contact Us
             </h2>
             <p className="text-gray-600 mb-6">
@@ -136,7 +136,7 @@ export default function ContactPage() {
 
               <div className="border-t pt-6">
                 <p className="text-gray-700 text-center mb-2">
-                  You can also reach us on <span className="font-semibold">02018881106</span> from Monday to Friday (8 am to 5 pm).
+                  You can also reach us on <span className="font-semibold">07069258526</span> from Monday to Friday (8 am to 5 pm).
                 </p>
                 
                 <p className="text-gray-700 text-center">
@@ -146,7 +146,7 @@ export default function ContactPage() {
             </div>
 
             {/* Image Section */}
-            <div className="bg-gradient-to-br from-[#00c950] to-[#00a844] rounded-2xl shadow-lg overflow-hidden h-64 md:h-80 flex items-center justify-center">
+            <div className="bg-green-500 rounded-2xl shadow-lg overflow-hidden h-64 md:h-80 flex items-center justify-center">
               <div className="text-center text-white p-8">
                 <Mail size={64} className="mx-auto mb-4 opacity-80" />
                 <p className="text-xl md:text-2xl font-semibold">
