@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-
+import useAuthStore from "../../store/useAuthStore";
+import SmallLoadingSpinner from "../common/SmallLoadingSpinner";
+import { useCartStore } from "../../store/useCartStore";
+import {Link} from 'react-router-dom'
 const SingleProduct = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(product.images);
   const [qty, setQty] = useState(1);
   const [cartAdded,setCartAdded]=useState('')
   const totalPrice = product.price * qty;
-
+  const [isLoading,setIsLoading]=useState(false)
   const payload = {
   products: [
     {
@@ -14,22 +17,38 @@ const SingleProduct = ({ product }) => {
     }
   ]
 };
+const token = useAuthStore((state) => state.token);
+const increment = useCartStore((state) => state.incrementCart);
   const url = `${import.meta.env.VITE_BACKEND_URL}/api/cart`
   const addToCart = async () => {
   try {
-    const res = await fetch("http://localhost:5000/api/cart", {
+    setIsLoading(true)
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${token}` // if your API needs auth
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(payload),
     });
 
     const data = await res.json();
-    console.log("Added to cart:", data);
+    if(data.success){
+      setIsLoading(false)
+      increment()
+      console.log(increment())
+      setCartAdded("Item added to cart")
+    setTimeout(()=>{
+      setCartAdded('')
+    },1000)
+    }
+    
   } catch (error) {
-    console.error("Error adding to cart:", error);
+     setIsLoading(false) 
+    setCartAdded('error')
+    setTimeout(()=>{
+      setCartAdded('')
+    },1000)
   }
 };
 
@@ -100,9 +119,11 @@ const SingleProduct = ({ product }) => {
 
             {/* ACTIONS */}
             <button  onClick={addToCart} className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600">
-              Add to Cart
+              {isLoading?<SmallLoadingSpinner/>: "Add to Cart"}
             </button>
+            <p>{cartAdded}</p>
 
+            
             <div className="text-sm text-gray-600">
               🔒 Guaranteed Safe Checkout
             </div>
@@ -114,7 +135,12 @@ const SingleProduct = ({ product }) => {
             <div className="text-center pt-3">
               <p className="font-semibold">Quick Order 24/7</p>
             </div>
-
+            <div className="w-full">
+              <Link to='/cart'  className="w-full block  bg-green-500 text-center text-white py-3 rounded-lg font-semibold hover:bg-green-600">
+                Veiw Cart
+              </Link>
+            </div>
+             
           </div>
         </div>
 
