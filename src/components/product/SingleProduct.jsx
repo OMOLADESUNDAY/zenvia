@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const SingleProduct = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(product.images);
   const [qty, setQty] = useState(1);
+  const [cartAdded,setCartAdded]=useState('')
   const totalPrice = product.price * qty;
 
   const payload = {
@@ -13,7 +14,7 @@ const SingleProduct = ({ product }) => {
     }
   ]
 };
-
+  const url = `${import.meta.env.VITE_BACKEND_URL}/api/cart`
   const addToCart = async () => {
   try {
     const res = await fetch("http://localhost:5000/api/cart", {
