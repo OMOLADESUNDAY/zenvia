@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../../components/common/BackButton";
 import { Trash2 } from "lucide-react";
 import useAuthStore from "../../store/useAuthStore";
@@ -16,7 +16,6 @@ export default function Cart() {
     clearCartItems,
     setCartCount,
   } = useCartStore();
-
   const url = `${import.meta.env.VITE_BACKEND_URL}/api/cart`;
 
   // -----------------------------
@@ -65,7 +64,6 @@ export default function Cart() {
           quantity: newQty,
         }),
       });
-
       updateItemQuantity(productId, newQty);
     } catch (err) {
       console.error("Quantity update failed:", err);
@@ -162,7 +160,7 @@ export default function Cart() {
                 <div>
                   <h3 className="font-medium">{item.product.name}</h3>
                   <p className="text-red-500 font-semibold">
-                    ${item.product.price.toFixed(2)}
+                    ${item.product.price.toFixed(2)*item.quantity}
                   </p>
 
                   {/* QUANTITY CONTROLS */}
