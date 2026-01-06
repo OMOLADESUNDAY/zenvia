@@ -1,6 +1,36 @@
 import { create } from "zustand";
 
 export const useCartStore = create((set) => ({
+  // REAL CART DATA
+  cartItems: [],
+
+  setCartItems: (items) =>
+    set({
+      cartItems: items || [],
+    }),
+
+  updateItemQuantity: (productId, quantity) =>
+    set((state) => ({
+      cartItems: state.cartItems.map((item) =>
+        item.product._id === productId
+          ? { ...item, quantity }
+          : item
+      ),
+    })),
+
+  removeItem: (productId) =>
+    set((state) => ({
+      cartItems: state.cartItems.filter(
+        (item) => item.product._id !== productId
+      ),
+    })),
+
+  clearCartItems: () =>
+    set({
+      cartItems: [],
+    }),
+
+  // UI COUNTER
   cartCount: 0,
 
   incrementCart: () =>
