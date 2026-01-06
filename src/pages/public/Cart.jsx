@@ -3,6 +3,7 @@ import BackButton from "../../components/common/BackButton";
 import { Trash2 } from "lucide-react";
 import useAuthStore from "../../store/useAuthStore";
 import { useCartStore } from "../../store/useCartStore";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const token = useAuthStore((state) => state.token);
@@ -118,6 +119,9 @@ export default function Cart() {
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
+  const tax=subtotal*0.05
+  const shipping=subtotal*0.1
+
 
   // -----------------------------
   // UI
@@ -212,22 +216,22 @@ export default function Cart() {
             </div>
             <div className="flex justify-between">
               <span>Shipping</span>
-              <span>$600.00</span>
+              <span>${shipping}</span>
             </div>
             <div className="flex justify-between">
               <span>Tax</span>
-              <span>$137.00</span>
+              <span>${tax}</span>
             </div>
             <hr />
             <div className="flex justify-between font-semibold">
               <span>Total</span>
-              <span>${(subtotal + 737).toFixed(2)}</span>
+              <span>${(subtotal + tax + shipping).toFixed(2)}</span>
             </div>
           </div>
 
-          <button className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg">
+          <Link to='/checkout' className="mt-6 w-full block text-center bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg">
             CHECKOUT
-          </button>
+          </Link>
         </div>
       </div>
     </div>
