@@ -1,15 +1,20 @@
-import { useState } from "react";
 
-const steps = ["Billing", "Address", "Review"];
+import { useState } from "react";
+import { useCartStore } from "../../store/useCartStore";
+import useAuthStore from "../../store/useAuthStore";
+const steps = ["Billing", "Address", "Review", "Payout"];
 
 export default function Checkout() {
   const [step, setStep] = useState(0);
   const [touched, setTouched] = useState({});
+  const { cartItems, clearCartItems,setCartCount } = useCartStore();
+
+
+
 
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    company: "",
     country: "",
     street: "",
     apartment: "",
@@ -17,12 +22,10 @@ export default function Checkout() {
     state: "",
     zip: "",
     phone: "",
-    email: "",
     notes: "",
-    createAccount: false,
-    payment: "bank",
+    payment:'card'
   });
-
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
@@ -31,6 +34,76 @@ export default function Checkout() {
   const handleBlur = (e) => {
     setTouched({ ...touched, [e.target.name]: true });
   };
+  const token = useAuthStore((state)=>state.token)
+   const url = `${import.meta.env.VITE_BACKEND_URL}/api/cart`;
+  const handleClearCart = async () => {
+    try {
+      await fetch(`${url}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      clearCartItems();
+      setCartCount(0);
+    } catch (err) {
+      console.error("Clear cart failed:", err);
+    }
+  };
+  const handleSubmit = async () => {
+  if (!cartItems.length) {
+    alert("Your cart is empty");
+    return;
+  }
+
+  const products = cartItems.map((item) => ({
+    product: item.product._id,
+    name: item.product.name,
+    qty: item.quantity,
+    price: item.product.price,
+    image: item.product.image,
+  }));
+  const itemsPrice = cartItems.reduce(
+    (acc, item) => acc + item.product.price * item.quantity,
+    0
+  );
+
+  const taxPrice = Number((itemsPrice * 0.075).toFixed(2));
+  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const totalPrice = itemsPrice + taxPrice + shippingPrice;
+
+  const payload = {
+    products,
+    shippingAddress: {
+      firstName: form.firstName,
+      lastName: form.lastName,
+      country: form.country,
+      street: form.street,
+      apartment: form.apartment,
+      city: form.city,
+      note: form.notes,
+      state: form.state,
+      zip: form.zip,
+      phone: form.phone,
+    },
+    paymentMethod: form.payment,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+  };
+
+  console.log("ORDER PAYLOAD 👉", payload);
+
+  // Example API call
+  // await axios.post("/api/orders", payload, {
+  //   headers: { Authorization: `Bearer ${token}` }
+  // });
+  handleClearCart()
+  clearCartItems(); // clear cart after successful order
+};
+
 
   const errors = {
     firstName: !form.firstName && "First name is required",
@@ -41,26 +114,11 @@ export default function Checkout() {
     state: !form.state && "State is required",
     zip: !form.zip && "Zip code is required",
     phone: !form.phone && "Phone is required",
-    email:
-      !form.email
-        ? "Email is required"
-        : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
-          "Invalid email format",
   };
 
   const isStepValid = () => {
-    if (step === 0) {
-      return (
-        !errors.firstName &&
-        !errors.lastName &&
-        !errors.country &&
-        !errors.street &&
-        !errors.city &&
-        !errors.state &&
-        !errors.zip &&
-        !errors.phone &&
-        !errors.email
-      );
+    if (step === 0 || step === 1) {
+      return Object.values(errors).every((e) => !e);
     }
     return true;
   };
@@ -80,117 +138,22 @@ export default function Checkout() {
           ))}
         </div>
 
-        {/* STEP 1 */}
+        {/* STEP 1 – BILLING */}
         {step === 0 && (
           <div className="grid md:grid-cols-2 gap-4">
-            <Input
-              required
-              label="First Name"
-              name="firstName"
-              value={form.firstName}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.firstName && errors.firstName}
-            />
-
-            <Input
-              required
-              label="Last Name"
-              name="lastName"
-              value={form.lastName}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.lastName && errors.lastName}
-            />
-
-            <Input
-              label="Company Name (Optional)"
-              name="company"
-              value={form.company}
-              onChange={handleChange}
-            />
-
-            <Select
-              required
-              label="Country / Region"
-              name="country"
-              value={form.country}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.country && errors.country}
-            />
-
-            <Input
-              required
-              label="Street Address"
-              name="street"
-              value={form.street}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.street && errors.street}
-            />
-
-            <Input
-              label="Apartment, suite (Optional)"
-              name="apartment"
-              value={form.apartment}
-              onChange={handleChange}
-            />
-
-            <Input
-              required
-              label="Town / City"
-              name="city"
-              value={form.city}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.city && errors.city}
-            />
-
-            <Input
-              required
-              label="State / County"
-              name="state"
-              value={form.state}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.state && errors.state}
-            />
-
-            <Input
-              required
-              label="Zip / Postal Code"
-              name="zip"
-              value={form.zip}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.zip && errors.zip}
-            />
-
-            <Input
-              required
-              label="Phone"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.phone && errors.phone}
-            />
-
-            <Input
-              required
-              label="Email Address"
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.email && errors.email}
-            />
+            <Input required label="First Name" name="firstName" value={form.firstName} onChange={handleChange} onBlur={handleBlur} error={touched.firstName && errors.firstName} />
+            <Input required label="Last Name" name="lastName" value={form.lastName} onChange={handleChange} onBlur={handleBlur} error={touched.lastName && errors.lastName} />
+            <Select required label="Country / Region" name="country" value={form.country} onChange={handleChange} onBlur={handleBlur} error={touched.country && errors.country} />
+            <Input required label="Street Address" name="street" value={form.street} onChange={handleChange} onBlur={handleBlur} error={touched.street && errors.street} />
+            <Input label="Apartment, suite (Optional)" name="apartment" value={form.apartment} onChange={handleChange} />
+            <Input required label="Town / City" name="city" value={form.city} onChange={handleChange} onBlur={handleBlur} error={touched.city && errors.city} />
+            <Input required label="State / County" name="state" value={form.state} onChange={handleChange} onBlur={handleBlur} error={touched.state && errors.state} />
+            <Input required label="Zip / Postal Code" name="zip" value={form.zip} onChange={handleChange} onBlur={handleBlur} error={touched.zip && errors.zip} />
+            <Input required label="Phone" name="phone" value={form.phone} onChange={handleChange} onBlur={handleBlur} error={touched.phone && errors.phone} />
           </div>
         )}
 
-        {/* STEP 2 */}
+        {/* STEP 2 – ADDRESS / NOTES */}
         {step === 1 && (
           <div className="space-y-4">
             <Textarea
@@ -199,21 +162,24 @@ export default function Checkout() {
               value={form.notes}
               onChange={handleChange}
             />
-
-            <Checkbox
-              label="Create an account?"
-              name="createAccount"
-              checked={form.createAccount}
-              onChange={handleChange}
-            />
           </div>
         )}
 
-        {/* STEP 3 */}
+        {/* STEP 3 – REVIEW */}
         {step === 2 && (
           <div className="grid md:grid-cols-2 gap-6">
+            <div className="border rounded-lg p-4 space-y-2 text-sm">
+              <h3 className="font-semibold mb-3">Review Information</h3>
+              <p><strong>Name:</strong> {form.firstName} {form.lastName}</p>
+              <p><strong>Address:</strong> {form.street}, {form.apartment && `${form.apartment},`} {form.city}, {form.state}</p>
+              <p><strong>Country:</strong> {form.country}</p>
+              <p><strong>Zip:</strong> {form.zip}</p>
+              <p><strong>Phone:</strong> {form.phone}</p>
+              {form.notes && <p><strong>Notes:</strong> {form.notes}</p>}
+            </div>
+
             <div className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-4">Your Order</h3>
+              <h3 className="font-semibold mb-4">Order Summary</h3>
               <div className="flex justify-between text-sm mb-2">
                 <span>Product Name</span>
                 <span>$120.00</span>
@@ -223,27 +189,23 @@ export default function Checkout() {
                 <span>$120.00</span>
               </div>
             </div>
+          </div>
+        )}
 
+        {/* STEP 4 – PAYOUT */}
+        {step === 3 && (
+          <div className="grid md:grid-cols-2 gap-6">
             <div className="border rounded-lg p-4 space-y-3">
               <h3 className="font-semibold">Payment Method</h3>
+              <Radio label="Debit/Credit Card" value="card" name="payment" checked={ form.payment === "card"} onChange={handleChange} />
+            </div>
 
-              <Radio
-                label="Direct Bank Transfer"
-                value="bank"
-                name="payment"
-                checked={form.payment === "bank"}
-                onChange={handleChange}
-              />
-              <Radio
-                label="PayPal"
-                value="paypal"
-                name="payment"
-                checked={form.payment === "paypal"}
-                onChange={handleChange}
-              />
-
-              <button className="w-full bg-green-600 text-white py-2 rounded text-sm font-medium hover:bg-green-700">
-                Place Order
+            <div className="border rounded-lg p-4 flex items-end">
+              <button
+                onClick={handleSubmit}
+                className="w-full bg-green-600 text-white py-2 rounded text-sm font-medium hover:bg-green-700"
+              >
+                Pay & Place Order
               </button>
             </div>
           </div>
@@ -325,15 +287,6 @@ function Textarea({ label, ...props }) {
         rows={4}
       />
     </div>
-  );
-}
-
-function Checkbox({ label, ...props }) {
-  return (
-    <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" {...props} />
-      {label}
-    </label>
   );
 }
 
