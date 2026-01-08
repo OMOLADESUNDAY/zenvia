@@ -35,10 +35,10 @@ export default function Checkout() {
     setTouched({ ...touched, [e.target.name]: true });
   };
   const token = useAuthStore((state)=>state.token)
-   const url = `${import.meta.env.VITE_BACKEND_URL}/api/cart`;
+   const url = `${import.meta.env.VITE_BACKEND_URL}`;
   const handleClearCart = async () => {
     try {
-      await fetch(`${url}/`, {
+      await fetch(`${url}/api/cart`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -97,9 +97,10 @@ export default function Checkout() {
   console.log("ORDER PAYLOAD 👉", payload);
 
   // Example API call
-  // await axios.post("/api/orders", payload, {
-  //   headers: { Authorization: `Bearer ${token}` }
-  // });
+  const res= await axios.post(`${url}/api/order/place-orders`, payload, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  console.log(res)
   handleClearCart()
   clearCartItems(); // clear cart after successful order
 };
