@@ -205,25 +205,18 @@ export default function Cart() {
 
         {/* ORDER SUMMARY */}
         <div className="bg-white rounded-xl p-6 shadow-sm sticky top-6 h-fit">
-          <h3 className="font-semibold text-lg mb-4">Order Summary</h3>
+          <h3 className="font-semibold text-lg mb-4">Cart Summary</h3>
 
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span>Sub Total</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span>${shipping}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Tax</span>
-              <span>${tax}</span>
-            </div>
+            
             <hr />
             <div className="flex justify-between font-semibold">
               <span>Total</span>
-              <span>${(subtotal + tax + shipping).toFixed(2)}</span>
+              <span>${(subtotal).toFixed(2)}</span>
             </div>
           </div>
 

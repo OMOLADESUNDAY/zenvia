@@ -8,10 +8,11 @@ import SingleProductPage from './pages/public/SingleProduct'
 import About from './pages/public/About'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
-import Checkout from './pages/user/Checkout'
 import Cart from './pages/public/Cart'
 import AccountInfo from './pages/user/Profile'
 import ContactPage from './pages/public/Contact'
+import CheckoutPageWrapper from './layouts/CheckoutPageWrapper'
+import PaymentSuccessModal from './components/ui/PaymentSuccessModal'
 
 
 function App() {
@@ -26,10 +27,11 @@ function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
-        <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/checkout' element={<CheckoutPageWrapper/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/profile' element={<AccountInfo/>}/>
         <Route path='/contact' element={<ContactPage/>}/>
+        <Route path='/payment-successful' element={<PaymentSuccessModal/>}/>
       </Routes>
       <Footer/>
     </>
