@@ -37,7 +37,7 @@ const Navbar = () => {
 };
 
 
-  const pagesDropdown = ["About", "FAQ", "Team"];
+  const pagesDropdown = ["About"];
   const productsDropdown = ["Product A", "Product B", "Product C"];
   const homeDropdown = ["Sub Home 1", "Sub Home 2"];
 
@@ -73,18 +73,9 @@ const Navbar = () => {
           <ul className="hidden md:flex items-center gap-6 text-sm font-semibold">
             <li className="relative group">
               <Link to="/" className="flex items-center gap-1">
-                Home <ChevronDown className="w-4 h-4" />
+                Home 
               </Link>
-              <ul className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all">
-                {homeDropdown.map((item) => (
-                  <li
-                    key={item}
-                    className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
-                  >
-                    <Link to="/">{item}</Link>
-                  </li>
-                ))}
-              </ul>
+             
             </li>
 
             <li className="relative group">
@@ -104,25 +95,6 @@ const Navbar = () => {
                 ))}
               </ul>
             </li>
-
-            <li className="relative group">
-              <Link to="/products" className="flex items-center gap-1">
-                Products <ChevronDown className="w-4 h-4" />
-              </Link>
-              <ul className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all">
-                {productsDropdown.map((product) => (
-                  <li
-                    key={product}
-                    className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
-                  >
-                    <Link to={`/${product.toLowerCase().replace(/\s/g, "")}`}>
-                      {product}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </li>
-
             <li>
               <Link to="/contact">Contact</Link>
             </li>
