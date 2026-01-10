@@ -112,11 +112,11 @@ const Navbar = () => {
               <p>Welcome</p>
               <div>
                 {token?<p className="capitalize">{user.name}</p>:<Link to="/login">
-                  <b>Log in</b>
+                  <p>Log in</p>
                 </Link>
                 /
                 <Link to="/register">
-                  <b>Register</b>
+                  <p>Register</p>
                 </Link>}
               </div>
             </div>

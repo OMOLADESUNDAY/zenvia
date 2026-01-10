@@ -2,7 +2,6 @@ import React from 'react'
 import useAxios from '../../hooks/useAxios'
 import LoadingSpinner from '../common/LoadingSpinner'
 import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import IconButton from '@mui/joy/IconButton';

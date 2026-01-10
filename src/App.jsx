@@ -13,6 +13,7 @@ import AccountInfo from './pages/user/Profile'
 import ContactPage from './pages/public/Contact'
 import CheckoutPageWrapper from './layouts/CheckoutPageWrapper'
 import PaymentSuccessModal from './components/ui/PaymentSuccessModal'
+import CategoryPage from './pages/public/Category'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/single/:id' element={<SingleProductPage/>}/>
+         <Route path='/categories/:slug' element={<CategoryPage/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>

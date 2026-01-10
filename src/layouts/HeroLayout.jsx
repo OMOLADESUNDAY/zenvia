@@ -35,7 +35,7 @@ const HeroLayout = () => {
           {data?.map((category) => (
             <Link
               key={category._id}
-              to={`/api/categories/${category.slug}`}
+              to={`/categories/${category.slug}`}
               className="text-sm py-1 hover:text-red-600"
             >
               {category.name}
