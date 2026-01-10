@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const faqs = [
   {
@@ -92,9 +93,9 @@ const FAQ = () => {
           <p className="text-gray-600 mb-4">
             Still have questions?
           </p>
-          <button className="bg-green-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-600 transition">
+          <Link to='/contact' className="bg-green-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-600 transition">
             Contact Support
-          </button>
+          </Link>
         </div>
       </div>
     </section>

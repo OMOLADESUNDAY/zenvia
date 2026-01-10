@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCartStore } from "../../store/useCartStore";
 import useAuthStore from "../../store/useAuthStore";
 import { useNavigate } from 'react-router-dom';
@@ -12,12 +12,15 @@ import {
 const steps = ["Billing", "Address", "Review", "Payout"];
 
 export default function Checkout() {
+const url = `${import.meta.env.VITE_BACKEND_URL}`;
+
+
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [touched, setTouched] = useState({});
   const { cartItems, clearCartItems, setCartCount } = useCartStore();
   const token = useAuthStore((state) => state.token);
-  const url = `${import.meta.env.VITE_BACKEND_URL}`;
+  
   const stripe = useStripe();
   const elements = useElements();
 
@@ -65,6 +68,30 @@ export default function Checkout() {
       console.error("Clear cart failed:", err);
     }
   };
+
+
+  useEffect(() => {
+  const fetchLastShipping = async () => {
+    try {
+      const res = await axios.get(`${url}/api/order/last-shipping`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(res)
+      if (res.data?.shippingAddress) {
+        setForm((prev) => ({
+          ...prev,
+          ...res.data.shippingAddress, // auto-fill the form
+        }));
+      }
+    } catch (err) {
+      console.error("Failed to fetch last shipping info:", err);
+    }
+  };
+
+  fetchLastShipping();
+}, [token, url]);
+
+
 
   const handleSubmit = async () => {
     if (!cartItems.length) {

@@ -1,58 +1,3 @@
-// import React from 'react'
-// import { useTranslation } from "react-i18next";
-// import LanguageSwitcher from './LanguageSwitcher';
-// import CurrencySwitcher from './currencySwitcher';
-// import "./navbar.css"
-// import logo from "../../../public/Zenvia.webp"
-// import { ChevronDown } from 'lucide-react';
-// import { Link } from 'react-router-dom';
-// const Navbar = () => {
-//     const { t } = useTranslation();
-//   return (
-//     <nav className='container navbar'>
-//         <section className='top-navbar flex align-center justify-between'>
-//             <div className='flex nav-hotline'><small>Hotline 24/7</small><small><b>(234)7069258526</b></small></div>
-//             <div className='flex'>
-//                 <div><LanguageSwitcher/></div>
-//                 <div><CurrencySwitcher/></div>
-//             </div>
-           
-//         </section>
-//         <section className='bottom-navbar flex justify-between pt-3 pb-3'>
-//         <div className="bottom-left-navbar flex items-center gap-8">
-//             <img src={logo} className='w-12' alt="zenvia" />
-//             <ul className='flex items-center gap-2'>
-//                 <li className='list-none flex text-sm'><b><Link>Home</Link></b> <ChevronDown className='text-sm cursor-pointer' /></li>
-                    
-//                 <li className='list-none flex text-sm'><b><Link>Pages</Link></b> <ChevronDown className='text-sm cursor-pointer'/></li>
-
-//                 <li className='list-none flex text-sm'><b><Link>Products</Link></b> <ChevronDown className='text-sm cursor-pointer'/> </li>
-//                 <li className='list-none flex text-sm'><b><Link>Contact</Link></b> </li>
-//             </ul>
-//         </div>
-//         <div className="bottom-right-navbar flex items-center ">
-//             <div className='flex items-center gap-3'>
-//                 <img src={logo} className='w-7 h-7' alt="user" />
-//                 <div>
-//                     <p>Welcome</p>
-//                     <div><Link><b>Log in</b></Link>/<Link><b>Register</b></Link></div>
-//                 </div>
-//             </div>
-
-//             <div className='flex items-center gap-3'>
-//                 <img src={logo} className='w-7 h-7' alt="user" />
-//                 <div>
-//                     <p>Cart</p>
-//                     <div>$900</div>
-//                 </div>
-//             </div>
-//         </div>
-//         </section>
-//     </nav>
-//   )
-// }
-
-// export default Navbar
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -61,8 +6,15 @@ import CurrencySwitcher from "./CurrencySwitcher";
 import logo from "/Zenvia.webp";
 import { ChevronDown, Menu, X, User, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore";
+import { useCartStore } from "../../store/useCartStore";
 
 const Navbar = () => {
+  const token = useAuthStore((state) => state.token);
+  const user = useAuthStore((state) => state.user);
+  const cartnumber =useCartStore((state) => state.cartCount);
+  const cartItems = useCartStore((state)=>state.cartItems)
+  const amount= cartItems.reduce((sum, item)=>sum + item.product.price, 0)
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState({
@@ -85,7 +37,7 @@ const Navbar = () => {
 };
 
 
-  const pagesDropdown = ["About Us", "FAQ", "Team"];
+  const pagesDropdown = ["About", "FAQ", "Team"];
   const productsDropdown = ["Product A", "Product B", "Product C"];
   const homeDropdown = ["Sub Home 1", "Sub Home 2"];
 
@@ -115,7 +67,7 @@ const Navbar = () => {
       {/* Bottom Navbar */}
       <div className="container mx-auto flex justify-between items-center py-3 px-4">
         <div className="flex items-center gap-8">
-          <img src={logo} className="w-12" alt="zenvia" />
+          <Link to='/'><img src={logo} className="w-12" alt="zenvia" /></Link>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-6 text-sm font-semibold">
@@ -181,30 +133,34 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-3">
             <div className="bg-gray-300 p-2 rounded-full">
-                 <User className="w-7 h-7" />
+                <Link to='/profile'><User className="w-7 h-7" /></Link>
+                 
             </div>
             <div>
               <p>Welcome</p>
               <div>
-                <Link to="/login">
+                {token?<p className="capitalize">{user.name}</p>:<Link to="/login">
                   <b>Log in</b>
                 </Link>
                 /
                 <Link to="/register">
                   <b>Register</b>
-                </Link>
+                </Link>}
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="bg-gray-300 p-2 rounded-full">
-                 <ShoppingCart className="w-7 h-7" />
+            <div className="bg-gray-300 p-2 rounded-full relative">
+              <Link to='/cart'>
+                <ShoppingCart className="w-7 h-7" />
+              </Link>
+                 <small className="absolute text-red-700 -top-2 -right-2 bg-gray-500 rounded-full w-5 h-5 text-center">{cartnumber}</small>
             </div>
            
             <div>
               <p>Cart</p>
-              <div>$900</div>
+              <div>${amount}</div>
             </div>
           </div>
         </div>
