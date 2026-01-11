@@ -3,7 +3,10 @@ import illustration from "../../assets/secure.png"; // replace with your image p
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import useAuthStore from "../../store/useAuthStore";
+import CopyText from "../../components/common/CopyText";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
+  const navigate=useNavigate()
   const login = useAuthStore((state) => state.login);
     const [showPassword, setShowPassword] = useState(false);
     const url=`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`
@@ -19,9 +22,7 @@ export default function Login() {
       const response = await axios.post(url, payload);
       console.log("Login success:", response.data);
        login({ token:response.data.token, user:response.data.user });
-      // Example:
-      // localStorage.setItem("token", response.data.token);
-      // navigate("/dashboard");
+      navigate("/");
 
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -136,6 +137,15 @@ export default function Login() {
                   Sign Up
                 </a>
               </p>
+
+              <div>
+                <p>Test Account</p>
+                <p>Email:dobeswalter@gmail.com <span><CopyText text="dobeswalter@gmail.com" /></span></p>
+                <p>password:1234 <span><CopyText text="1234" /></span></p>
+                
+              </div>
+
+
             </div>
           </div>
 
