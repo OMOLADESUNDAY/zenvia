@@ -111,13 +111,19 @@ const Navbar = () => {
             <div>
               <p>Welcome</p>
               <div>
-                {token?<p className="capitalize">{user.name}</p>:<Link to="/login">
-                  <p>Log in</p>
-                </Link>
-                /
-                <Link to="/register">
-                  <p>Register</p>
-                </Link>}
+              {token ? (
+  <p className="capitalize">{user?.name}</p>
+) : (
+  <>
+    <Link to="/login">
+      <p>Log in</p>
+    </Link>
+    <span className="mx-1">/</span>
+    <Link to="/register">
+      <p>Register</p>
+    </Link>
+  </>
+)}
               </div>
             </div>
           </div>
