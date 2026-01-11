@@ -116,11 +116,11 @@ const Navbar = () => {
 ) : (
   <>
     <Link to="/login">
-      <p>Log in</p>
+      <small className="font-bold">Log in</small>
     </Link>
     <span className="mx-1">/</span>
     <Link to="/register">
-      <p>Register</p>
+      <small className="font-bold">Register</small>
     </Link>
   </>
 )}
