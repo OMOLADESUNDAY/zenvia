@@ -161,7 +161,7 @@ const ChangePassword = () => (
       />
 
       <button className="rounded-md bg-green-500 px-6 py-2 text-sm font-medium text-white">
-        Update Password
+        Update Passworkd
       </button>
     </form>
   </>
