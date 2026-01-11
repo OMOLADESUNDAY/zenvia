@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import illustration from "../../assets/secure.png";
 import { Eye, EyeOff } from "lucide-react";
-
+import axios from "axios";
+import SmallLoadingSpinner from '../../components/common/SmallLoadingSpinner'
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [message, setMessage]=useState('')
+  const [loading,setLoading]=useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -49,10 +51,10 @@ export default function Register() {
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (
-      !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(formData.password)
+      (!/^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(formData.password))
     ) {
       newErrors.password =
-        "Password must be at least 8 characters and include a number";
+        "Password must be at least 6 characters and include a number";
     }
 
     if (!formData.confirmPassword) {
@@ -66,13 +68,32 @@ export default function Register() {
   };
 
   // Submit
-  const registerNow = (e) => {
+  const registerNow = async(e) => {
     e.preventDefault();
-
+setLoading(true)
     if (!validate()) return;
+    const {name,email,password}=formData
+    const payload={name,email,password}
+    const url=`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`
+    try {
+      const res=await axios.post(url,payload)
+      setLoading(false)
+      setMessage(res.data.message)
+    } catch (error) {
+      setMessage('error')
+    }
+    
+     // ✅ Clear form after successful register
+  // setFormData({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
 
-    // ✅ Ready to send to backend
-    console.log("Register data:", formData);
+  // // Optional: clear errors & hide password
+  // setErrors({});
+  // setShowPassword(false);
   };
 
   return (
@@ -162,15 +183,25 @@ export default function Register() {
                   <label className="block text-sm font-medium mb-1">
                     Confirm Password
                   </label>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    placeholder="••••••••"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500"
-                  />
-                  
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      placeholder="••••••••"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border rounded-md pr-10 focus:ring-2 focus:ring-green-500"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-3 flex items-center"
+                    >
+                      {showPassword ? <EyeOff /> : <Eye />}
+                    </button>
+                  </div>
+
+
                   {errors.confirmPassword && (
                     <p className="text-red-500 text-sm mt-1">
                       {errors.confirmPassword}
@@ -182,10 +213,11 @@ export default function Register() {
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md"
                 >
-                  REGISTER
+                 {loading? <SmallLoadingSpinner/>: "REGISTER"}
                 </button>
 
               </form>
+              <p className={message==='error'?'text-red-700':'text-green-900'}>{message}</p>
             </div>
           </div>
 
