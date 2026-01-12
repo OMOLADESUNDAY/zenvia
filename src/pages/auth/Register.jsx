@@ -297,6 +297,7 @@ export default function Register() {
       setMessage(res.data.message || "Google login successful");
     } catch (err) {
       setLoading(false);
+      console.log(err)
       setMessage("Google login failed");
     }
   };
@@ -331,7 +332,7 @@ export default function Register() {
       <span>Continue with Google</span>
     </>
   )}
-</button>
+          </button>
               </div>
 
               {/* Divider */}
