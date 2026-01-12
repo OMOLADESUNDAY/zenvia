@@ -82,7 +82,7 @@
 //     } catch (error) {
 //       setMessage('error')
 //     }
-    
+
 //      // ✅ Clear form after successful register
 //   // setFormData({
 //   //   name: "",
@@ -201,7 +201,6 @@
 //                     </button>
 //                   </div>
 
-
 //                   {errors.confirmPassword && (
 //                     <p className="text-red-500 text-sm mt-1">
 //                       {errors.confirmPassword}
@@ -230,12 +229,12 @@ import React, { useState } from "react";
 import illustration from "../../assets/secure.png";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
-import SmallLoadingSpinner from '../../components/common/SmallLoadingSpinner';
+import SmallLoadingSpinner from "../../components/common/SmallLoadingSpinner";
 import googleLogo from "../../assets/google.png"; // Add Google logo image in your assets
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -253,7 +252,8 @@ export default function Register() {
   const validate = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Name is required";
-    else if (formData.name.length < 2) newErrors.name = "Name must be at least 2 characters";
+    else if (formData.name.length < 2)
+      newErrors.name = "Name must be at least 2 characters";
 
     if (!formData.email) newErrors.email = "Email is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
@@ -261,9 +261,11 @@ export default function Register() {
 
     if (!formData.password) newErrors.password = "Password is required";
     else if (!/^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(formData.password))
-      newErrors.password = "Password must be at least 6 characters and include a number";
+      newErrors.password =
+        "Password must be at least 6 characters and include a number";
 
-    if (!formData.confirmPassword) newErrors.confirmPassword = "Confirm your password";
+    if (!formData.confirmPassword)
+      newErrors.confirmPassword = "Confirm your password";
     else if (formData.password !== formData.confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
 
@@ -278,7 +280,10 @@ export default function Register() {
 
     const { name, email, password } = formData;
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, { name, email, password });
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`,
+        { name, email, password }
+      );
       setLoading(false);
       setMessage(res.data.message);
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
@@ -288,25 +293,26 @@ export default function Register() {
     }
   };
 
-  // Google login click handler
-  const handleGoogle = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`);
-      setLoading(false);
-      setMessage(res.data.message || "Google login successful");
-    } catch (err) {
-      setLoading(false);
-      console.log(err)
-      setMessage("Google login failed");
-    }
-  };
+  // // Google login click handler
+  // const handleGoogle = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const res = await axios.get(
+  //       `${import.meta.env.VITE_BACKEND_URL}/api/auth/google`
+  //     );
+  //     setLoading(false);
+  //     setMessage(res.data.message || "Google login successful");
+  //   } catch (err) {
+  //     setLoading(false);
+  //     console.log(err);
+  //     setMessage("Google login failed");
+  //   }
+  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
-
           {/* Illustration */}
           <div className="hidden md:flex items-center justify-center bg-gray-100 p-8">
             <img src={illustration} alt="Register" />
@@ -315,24 +321,29 @@ export default function Register() {
           {/* Form */}
           <div className="flex items-center justify-center p-8 sm:p-10">
             <div className="w-full max-w-md">
-              <h2 className="text-2xl font-semibold text-green-600 text-center">Register</h2>
+              <h2 className="text-2xl font-semibold text-green-600 text-center">
+                Register
+              </h2>
 
               {/* Google Login Button */}
               <div className="mt-6">
-               <button
-  onClick={handleGoogle}
-  type="button"
-  className="w-full cursor-pointer flex items-center justify-center border border-gray-300 hover:bg-gray-50 py-2 rounded-md text-gray-800 font-medium"
->
-  {loading ? (
-    <SmallLoadingSpinner />
-  ) : (
-    <>
-      <img src={googleLogo} alt="Google logo" className="w-5 h-5 mr-3" />
-      <span>Continue with Google</span>
-    </>
-  )}
-          </button>
+                <a
+                  className="w-full cursor-pointer flex items-center justify-center border border-gray-300 hover:bg-gray-50 py-2 rounded-md text-gray-800 font-medium"
+                  href="https://zenviaapi.onrender.com/api/auth/google"
+                >
+                  {loading ? (
+                    <SmallLoadingSpinner />
+                  ) : (
+                    <>
+                      <img
+                        src={googleLogo}
+                        alt="Google logo"
+                        className="w-5 h-5 mr-3"
+                      />
+                      <span>Continue with Google</span>
+                    </>
+                  )}
+                </a>
               </div>
 
               {/* Divider */}
@@ -344,10 +355,11 @@ export default function Register() {
 
               {/* Registration Form */}
               <form onSubmit={registerNow} className="mt-8 space-y-5">
-
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium mb-1">Your name</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Your name
+                  </label>
                   <input
                     type="text"
                     name="name"
@@ -356,12 +368,16 @@ export default function Register() {
                     onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500"
                   />
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium mb-1">Email Address</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Email Address
+                  </label>
                   <input
                     type="email"
                     name="email"
@@ -370,12 +386,16 @@ export default function Register() {
                     onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500"
                   />
-                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
 
                 {/* Password */}
                 <div>
-                  <label className="block text-sm font-medium mb-1">Password</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Password
+                  </label>
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -393,12 +413,18 @@ export default function Register() {
                       {showPassword ? <EyeOff /> : <Eye />}
                     </button>
                   </div>
-                  {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+                  {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password}
+                    </p>
+                  )}
                 </div>
 
                 {/* Confirm Password */}
                 <div>
-                  <label className="block text-sm font-medium mb-1">Confirm Password</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Confirm Password
+                  </label>
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -416,7 +442,11 @@ export default function Register() {
                       {showPassword ? <EyeOff /> : <Eye />}
                     </button>
                   </div>
-                  {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+                  {errors.confirmPassword && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.confirmPassword}
+                    </p>
+                  )}
                 </div>
 
                 <button
@@ -425,12 +455,16 @@ export default function Register() {
                 >
                   {loading ? <SmallLoadingSpinner /> : "REGISTER"}
                 </button>
-
               </form>
-              <p className={message === 'error' ? 'text-red-700' : 'text-green-900'}>{message}</p>
+              <p
+                className={
+                  message === "error" ? "text-red-700" : "text-green-900"
+                }
+              >
+                {message}
+              </p>
             </div>
           </div>
-
         </div>
       </div>
     </div>
