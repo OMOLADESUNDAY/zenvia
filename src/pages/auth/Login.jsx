@@ -141,7 +141,7 @@ export default function Login() {
               <div>
                 <p>Test Account</p>
                 <p>Email:dobeswalter@gmail.com <span><CopyText text="dobeswalter@gmail.com" /></span></p>
-                <p>password:1234 <span><CopyText text="1234" /></span></p>
+                <p>password:Tester1234@# <span><CopyText text="Tester1234@#" /></span></p>
                 
               </div>
 

@@ -231,6 +231,7 @@ import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import SmallLoadingSpinner from "../../components/common/SmallLoadingSpinner";
 import googleLogo from "../../assets/google.png"; // Add Google logo image in your assets
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -242,6 +243,7 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+  const navigate=useNavigate()
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -287,6 +289,7 @@ export default function Register() {
       setLoading(false);
       setMessage(res.data.message);
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+      navigate("/login");
     } catch (error) {
       setLoading(false);
       setMessage(error.response?.data?.message || "Registration failed");
@@ -326,7 +329,7 @@ export default function Register() {
               </h2>
 
               {/* Google Login Button */}
-              <div className="mt-6">
+              {/* <div className="mt-6">
                 <a
                   className="w-full cursor-pointer flex items-center justify-center border border-gray-300 hover:bg-gray-50 py-2 rounded-md text-gray-800 font-medium"
                   href="https://zenviaapi.onrender.com/api/auth/google"
@@ -344,7 +347,7 @@ export default function Register() {
                     </>
                   )}
                 </a>
-              </div>
+              </div> */}
 
               {/* Divider */}
               <div className="flex items-center gap-3 my-6">
