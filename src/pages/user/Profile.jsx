@@ -1,8 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
 import userpic from "../../assets/user.jpg";
-
+import useAuthStore from "../../store/useAuthStore";
 const AccountInfo = () => {
   const [activeTab, setActiveTab] = useState("account");
+  const navigate = useNavigate();
+
+  // ---------------- Logout Function ----------------
+  const handleLogout = () => {
+    if (!window.confirm("Are you sure you want to logout?")) return;
+    const logout=useAuthStore((state)=>state.logout)
+    // Clear local storage auth info
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    console.log(logout)
+    // Redirect to login page
+    navigate("/login");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8">
@@ -10,39 +25,53 @@ const AccountInfo = () => {
         <div className="flex flex-col md:flex-row">
 
           {/* Sidebar */}
-          <aside className="w-full md:w-1/4 border-b md:border-b-0 md:border-r p-6">
-            <div className="flex flex-col items-center text-center">
-              <img
-                src={userpic}
-                alt="User Avatar"
-                className="h-24 w-24 rounded-full bg-gray-200"
-              />
-              <h2 className="mt-4 text-lg font-semibold">Mark Cole</h2>
-              <p className="text-sm text-gray-500">swoo@gmail.com</p>
+          <aside className="w-full md:w-1/4 border-b md:border-b-0 md:border-r p-6 flex flex-col justify-between">
+            
+            {/* Profile Info */}
+            <div>
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src={userpic}
+                  alt="User Avatar"
+                  className="h-24 w-24 rounded-full bg-gray-200"
+                />
+                <h2 className="mt-4 text-lg font-semibold">Mark Cole</h2>
+                <p className="text-sm text-gray-500">swoo@gmail.com</p>
+              </div>
+
+              {/* Navigation */}
+              <nav className="mt-8 space-y-2">
+                <SidebarButton
+                  active={activeTab === "account"}
+                  onClick={() => setActiveTab("account")}
+                  label="Account info"
+                />
+                <SidebarButton
+                  active={activeTab === "orders"}
+                  onClick={() => setActiveTab("orders")}
+                  label="My order"
+                />
+                <SidebarButton
+                  active={activeTab === "address"}
+                  onClick={() => setActiveTab("address")}
+                  label="My address"
+                />
+                <SidebarButton
+                  active={activeTab === "password"}
+                  onClick={() => setActiveTab("password")}
+                  label="Change password"
+                />
+              </nav>
             </div>
 
-            <nav className="mt-8 space-y-2">
-              <SidebarButton
-                active={activeTab === "account"}
-                onClick={() => setActiveTab("account")}
-                label="Account info"
-              />
-              <SidebarButton
-                active={activeTab === "orders"}
-                onClick={() => setActiveTab("orders")}
-                label="My order"
-              />
-              <SidebarButton
-                active={activeTab === "address"}
-                onClick={() => setActiveTab("address")}
-                label="My address"
-              />
-              <SidebarButton
-                active={activeTab === "password"}
-                onClick={() => setActiveTab("password")}
-                label="Change password"
-              />
-            </nav>
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="mt-10 flex items-center justify-center gap-2 rounded-md border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition"
+            >
+              <LogOut size={16} />
+              Logout
+            </button>
           </aside>
 
           {/* Main Content */}
@@ -74,7 +103,7 @@ const SidebarButton = ({ active, onClick, label }) => (
   </button>
 );
 
-/* ---------- Account Info ---------- */
+/* ---------- Account Form ---------- */
 const AccountForm = () => (
   <>
     <h1 className="mb-6 text-xl font-semibold">Account Info</h1>
@@ -112,7 +141,9 @@ const MyOrders = () => (
           </div>
           <div className="text-right">
             <p>{order.total}</p>
-            <p className="text-sm text-green-600">{order.status}</p>
+            <p className={`text-sm ${order.status === "Delivered" ? "text-green-600" : "text-yellow-600"}`}>
+              {order.status}
+            </p>
           </div>
         </div>
       ))}
@@ -161,7 +192,7 @@ const ChangePassword = () => (
       />
 
       <button className="rounded-md bg-green-500 px-6 py-2 text-sm font-medium text-white">
-        Update Passworkd
+        Update Password
       </button>
     </form>
   </>
