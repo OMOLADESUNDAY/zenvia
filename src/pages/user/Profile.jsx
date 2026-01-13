@@ -15,6 +15,7 @@ const AccountInfo = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     console.log(logout)
+    const testing="bugging"
     // Redirect to login page
     navigate("/login");
   };
