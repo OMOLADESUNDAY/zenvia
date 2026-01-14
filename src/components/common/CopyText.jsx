@@ -1,8 +1,12 @@
 import { Copy } from "lucide-react";
-const CopyText = ({ text }) => {
+const CopyText = ({ text ,setCopied}) => {
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(text);
-    alert("Copied!");
+    setCopied('copied')
+    setTimeout(()=>{
+       setCopied('')
+    },1000)
+   
   };
 
   return (

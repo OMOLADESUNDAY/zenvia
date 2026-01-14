@@ -7,7 +7,9 @@ import CopyText from "../../components/common/CopyText";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
   const navigate=useNavigate()
-  const login = useAuthStore((state) => state.login);
+    const [copied,setCopied]=useState('')
+    const [copiedpassword,setCopiedpassword]=useState('')
+    const login = useAuthStore((state) => state.login);
     const [showPassword, setShowPassword] = useState(false);
     const url=`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`
     const [payload,setPayload]=useState({email:'',password:""})
@@ -140,8 +142,8 @@ export default function Login() {
 
               <div>
                 <p>Test Account</p>
-                <p>Email:dobeswalter@gmail.com <span><CopyText text="dobeswalter@gmail.com" /></span></p>
-                <p>password:Tester1234@# <span><CopyText text="Tester1234@#" /></span></p>
+                <p>Email:dobeswalter@gmail.com <span><CopyText setCopied={setCopied} text="dobeswalter@gmail.com" />{copied}</span></p>
+                <p>password:Tester1234@# <span><CopyText setCopied={setCopiedpassword} text="Tester1234@#" /></span>{copiedpassword}</p>
                 
               </div>
 
