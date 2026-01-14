@@ -4,19 +4,13 @@ import { LogOut } from "lucide-react";
 import userpic from "../../assets/user.jpg";
 import useAuthStore from "../../store/useAuthStore";
 const AccountInfo = () => {
+   const logout=useAuthStore((state)=>state.logout)
   const [activeTab, setActiveTab] = useState("account");
   const navigate = useNavigate();
 
   // ---------------- Logout Function ----------------
   const handleLogout = () => {
-    if (!window.confirm("Are you sure you want to logout?")) return;
-    const logout=useAuthStore((state)=>state.logout)
-    // Clear local storage auth info
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    console.log(logout)
-    const testing="bugging"
-    // Redirect to login page
+    logout()
     navigate("/login");
   };
 
