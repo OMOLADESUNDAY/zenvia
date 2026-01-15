@@ -104,10 +104,10 @@ const Navbar = () => {
         {/* Desktop Right Side */}
         <div className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-3">
-            <div className="bg-gray-300 p-2 rounded-full">
+            {token ?<div className="bg-gray-300 p-2 rounded-full">
                 <Link to='/profile'><User className="w-7 h-7" /></Link>
                  
-            </div>
+            </div>:""}
             <div>
               <p>Welcome</p>
               <div>
