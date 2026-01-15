@@ -67,7 +67,7 @@ const Navbar = () => {
       {/* Bottom Navbar */}
       <div className="container mx-auto flex justify-between items-center py-3 px-4">
         <div className="flex items-center gap-8">
-          <Link to='/'><img src={logo} className="w-12" alt="zenvia" /></Link>
+          <Link to='/' onClick={closeMobileMenu}><img src={logo} className="w-12" alt="zenvia" /></Link>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-6 text-sm font-semibold">
@@ -160,9 +160,9 @@ const Navbar = () => {
             <li>
               <button
                 className="flex justify-between w-full items-center"
-                onClick={() => toggleDropdown("home")}
+                onClick={closeMobileMenu}
               >
-                Home <ChevronDown onClick={closeMobileMenu} className={`w-4 h-4 transition-transform ${mobileDropdownOpen.home ? "rotate-180" : ""}`} />
+                Home 
               </button>
              
             </li>
