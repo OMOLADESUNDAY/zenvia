@@ -208,12 +208,19 @@ const Navbar = () => {
               </button>
               {mobileDropdownOpen.user && (
                 <ul className="pl-4 mt-1 flex flex-col gap-1">
-                  <li>
-                    <Link onClick={closeMobileMenu} to="/login">Log in</Link>
-                  </li>
-                  <li>
-                    <Link onClick={closeMobileMenu} to="/register">Register</Link>
-                  </li>
+                   {token ? (
+  <p className="capitalize">{user?.name}</p>
+) : (
+  <>
+    <Link to="/login">
+      <small className="font-bold">Log in</small>
+    </Link>
+    <span className="mx-1">/</span>
+    <Link to="/register">
+      <small className="font-bold">Register</small>
+    </Link>
+  </>
+)}
                 </ul>
               )}
             </li>
