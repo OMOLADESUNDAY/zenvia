@@ -162,17 +162,9 @@ const Navbar = () => {
                 className="flex justify-between w-full items-center"
                 onClick={() => toggleDropdown("home")}
               >
-                Home <ChevronDown className={`w-4 h-4 transition-transform ${mobileDropdownOpen.home ? "rotate-180" : ""}`} />
+                Home <ChevronDown onClick={closeMobileMenu} className={`w-4 h-4 transition-transform ${mobileDropdownOpen.home ? "rotate-180" : ""}`} />
               </button>
-              {mobileDropdownOpen.home && (
-                <ul className="pl-4 mt-1 flex flex-col gap-1">
-                  {homeDropdown.map((item) => (
-                    <li key={item}>
-                      <Link onClick={closeMobileMenu} to="/">{item}</Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
+             
             </li>
 
             {/* Pages */}
@@ -195,23 +187,7 @@ const Navbar = () => {
             </li>
 
             {/* Products */}
-            <li>
-              <button
-                className="flex justify-between w-full items-center"
-                onClick={() => toggleDropdown("products")}
-              >
-                Products <ChevronDown className={`w-4 h-4 transition-transform ${mobileDropdownOpen.products ? "rotate-180" : ""}`} />
-              </button>
-              {mobileDropdownOpen.products && (
-                <ul className="pl-4 mt-1 flex flex-col gap-1">
-                  {productsDropdown.map((product) => (
-                    <li key={product}>
-                      <Link onClick={closeMobileMenu} to={`/${product.toLowerCase().replace(/\s/g, "")}`}>{product}</Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
+            
 
             {/* Contact */}
             <li>
@@ -256,9 +232,9 @@ const Navbar = () => {
               </button>
               {mobileDropdownOpen.cart && (
                 <ul className="pl-4 mt-1 flex flex-col gap-1">
-                  <li>Total: $900</li>
+                  <li>Total: ${amount}</li>
                   <li>
-                    <Link to="/cart">View Cart</Link>
+                    <Link to="/cart" onClick={closeMobileMenu} >View Cart</Link>
                   </li>
                 </ul>
               )}
