@@ -4,7 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import useAuthStore from "../../store/useAuthStore";
 import CopyText from "../../components/common/CopyText";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const navigate=useNavigate()
     const [copied,setCopied]=useState('')
@@ -135,9 +135,9 @@ export default function Login() {
               {/* Footer */}
               <p className="text-sm text-center text-gray-600 mt-6">
                 New user?{" "}
-                <a href="#" className="text-green-600 font-medium hover:underline">
+                <Link to='/register' className="text-green-600 font-medium hover:underline">
                   Sign Up
-                </a>
+                </Link>
               </p>
 
               <div>

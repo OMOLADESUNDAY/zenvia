@@ -76,7 +76,6 @@ const url = `${import.meta.env.VITE_BACKEND_URL}`;
       const res = await axios.get(`${url}/api/order/last-shipping`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res)
       if (res.data?.shippingAddress) {
         setForm((prev) => ({
           ...prev,

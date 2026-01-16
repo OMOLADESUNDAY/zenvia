@@ -231,7 +231,7 @@ import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import SmallLoadingSpinner from "../../components/common/SmallLoadingSpinner";
 import googleLogo from "../../assets/google.png"; // Add Google logo image in your assets
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -350,11 +350,11 @@ export default function Register() {
               </div> */}
 
               {/* Divider */}
-              <div className="flex items-center gap-3 my-6">
+              {/* <div className="flex items-center gap-3 my-6">
                 <div className="flex-1 h-px bg-gray-300"></div>
                 <span className="text-sm text-gray-500">OR</span>
                 <div className="flex-1 h-px bg-gray-300"></div>
-              </div>
+              </div> */}
 
               {/* Registration Form */}
               <form onSubmit={registerNow} className="mt-8 space-y-5">
@@ -459,6 +459,13 @@ export default function Register() {
                   {loading ? <SmallLoadingSpinner /> : "REGISTER"}
                 </button>
               </form>
+
+              <p className="text-sm text-center text-gray-600 mt-6">
+                Have an account?{" "}
+                <Link to='/login' className="text-green-600 font-medium hover:underline">
+                  Login
+                </Link>
+              </p>
               <p
                 className={
                   message === "error" ? "text-red-700" : "text-green-900"
