@@ -52,14 +52,14 @@
 
 
 
+import { Routes, Route } from 'react-router-dom'
 
+// Layouts
+import PublicLayout from './layouts/PublicLayout'
+import AdminLayout from './layouts/AdminLayout'
 
-import { useState } from 'react'
-import Navbar from './components/common/Navbar'
-import SearchNav from './components/common/SearchNav'
+// Pages
 import Home from './pages/public/Home'
-import Footer from './components/common/Footer'
-import { Route, Routes } from 'react-router-dom'
 import SingleProductPage from './pages/public/SingleProduct'
 import About from './pages/public/About'
 import Login from './pages/auth/Login'
@@ -70,27 +70,36 @@ import ContactPage from './pages/public/Contact'
 import CheckoutPageWrapper from './layouts/CheckoutPageWrapper'
 import PaymentSuccessModal from './components/ui/PaymentSuccessModal'
 import CategoryPage from './pages/public/Category'
-import AdminProtected from './route/AdminProtected'
+import AdminDashboard from './pages/user/AdminDashboard'
+
+// Route Guards
 import UserProtected from './route/UserProtected'
+import AdminProtected from './route/AdminProtected'
+import Navbar from './components/common/Navbar'
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <SearchNav />
-      <Routes>
-        {/* Public Routes */}
+    <Routes>
+
+      {/* PUBLIC LAYOUT */}
+      <Route element={<PublicLayout />}>
         <Route path='/' element={<Home />} />
         <Route path='/single/:id' element={<SingleProductPage />} />
         <Route path='/categories/:slug' element={<CategoryPage />} />
         <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/cart' element={<UserProtected> <Cart /></UserProtected>} />
         <Route path='/contact' element={<ContactPage />} />
-        <Route path='/payment-successful' element={<UserProtected><PaymentSuccessModal /></UserProtected> } />
 
-        {/* Protected Routes */}
+        <Route
+          path='/cart'
+          element={
+            <UserProtected>
+              <Cart />
+            </UserProtected>
+          }
+        />
+
         <Route
           path='/checkout'
           element={
@@ -99,6 +108,7 @@ function App() {
             </UserProtected>
           }
         />
+
         <Route
           path='/profile'
           element={
@@ -107,9 +117,29 @@ function App() {
             </UserProtected>
           }
         />
-      </Routes>
-      <Footer />
-    </>
+
+        <Route
+          path='/payment-successful'
+          element={
+            <UserProtected>
+              <PaymentSuccessModal />
+            </UserProtected>
+          }
+        />
+      </Route>
+
+      {/* ADMIN LAYOUT (NO NAVBAR / FOOTER) */}
+      <Route
+        element={
+          <AdminProtected>
+            <AdminLayout />
+          </AdminProtected>
+        }
+      >
+        <Route path='/user/myadmin/admin' element={<AdminDashboard />} />
+      </Route>
+
+    </Routes>
   )
 }
 

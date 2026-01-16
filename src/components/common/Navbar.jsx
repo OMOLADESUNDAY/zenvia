@@ -105,8 +105,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-3">
             {token ?<div className="bg-gray-300 p-2 rounded-full">
-                <Link to='/profile'><User className="w-7 h-7" /></Link>
-                 
+                <Link to={user.role==="admin"?'/user/myadmin/admin':'/profile'}><User className="w-7 h-7" /></Link>
             </div>:""}
             <div>
               <p>Welcome</p>
@@ -128,7 +127,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          {user?.role==="admin"?"":<div className="flex items-center gap-3">
             <div className="bg-gray-300 p-2 rounded-full relative">
               <Link to='/cart'>
                 <ShoppingCart className="w-7 h-7" />
@@ -140,7 +139,7 @@ const Navbar = () => {
               <p>Cart</p>
               <div>${amount}</div>
             </div>
-          </div>
+          </div>}
         </div>
 
         {/* Mobile Menu Button */}
