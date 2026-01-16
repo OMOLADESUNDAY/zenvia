@@ -73,9 +73,12 @@ const DealOfTheDay = () => {
               <p className="text-sm md:text-base">
                 {randomProduct.description}
               </p>
-
-              <button className="btn w-fit mt-2">Get Now</button>
-
+              <Link
+                    to={`/single/${randomProduct._id}`}
+                    className="btn w-fit text-sm cursor-pointer"
+                  >
+                    Get Now
+                  </Link>
               <p>
                 Stock:{" "}
                 <b
@@ -116,7 +119,7 @@ const DealOfTheDay = () => {
 
                   <Link
                     to={`/single/${product._id}`}
-                    className="btn w-fit text-sm"
+                    className="btn w-fit text-sm cursor-pointer"
                   >
                     Get Now
                   </Link>
