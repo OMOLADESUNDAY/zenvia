@@ -1,13 +1,14 @@
+
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="bg-white  mt-16">
+    <footer className="bg-white mt-16">
       <div className="container mx-auto px-4 py-10">
 
         {/* TOP GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
           {/* BRAND & CONTACT */}
           <div className="space-y-3">
@@ -21,7 +22,7 @@ const Footer = () => {
 
             {/* Socials */}
             <div className="flex gap-3 pt-2">
-              {[<Twitter />,<Facebook />, <Linkedin />, <Instagram />].map((icon, i) => (
+              {[<Twitter />, <Facebook />, <Linkedin />, <Instagram />].map((icon, i) => (
                 <span
                   key={i}
                   className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer hover:bg-green-500 hover:text-white transition"
@@ -32,39 +33,21 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* TOP CATEGORIES */}
-          <div>
-            <h4 className="font-bold mb-3">Top Categories</h4>
-            <ul className="space-y-2 text-sm text-gray-600">
-              {[
-                "Laptops",
-                "PC & Computers",
-                "Cell Phones",
-                "Tablets",
-                "Gaming & VR",
-                "Networks",
-                "Cameras",
-                "Sounds",
-                "Office",
-              ].map((item, i) => (
-                <li key={i} className="hover:text-green-500 cursor-pointer">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* COMPANY */}
           <div>
             <h4 className="font-bold mb-3">Company</h4>
             <ul className="space-y-2 text-sm text-gray-600">
-              {["About Zenvia", "Contact", "Career", "Blog", "Sitemap", "Store Locations"].map(
-                (item, i) => (
-                  <li key={i} className="hover:text-green-500 cursor-pointer">
-                    {item}
-                  </li>
-                )
-              )}
+              {[
+                { label: "About Zenvia", link: "/about" },
+                { label: "Contact", link: "/contact" },
+                { label: "My Account", link: "/profile" }
+              ].map((item, i) => (
+                <li key={i}>
+                  <Link to={item.link} className="hover:text-green-500">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -73,57 +56,39 @@ const Footer = () => {
             <h4 className="font-bold mb-3">Help Center</h4>
             <ul className="space-y-2 text-sm text-gray-600">
               {[
-                "Customer Service",
-                "Policy",
-                "Terms & Conditions",
-                "Track Order",
-                "FAQs",
-                "My Account",
-                "Product Support",
+                { label: "Customer Service", link: "/customer-service" },
+                { label: "My Account", link: "/account" },
+                { label: "Policy", link: "/policy" },
+                { label: "Terms & Conditions", link: "/terms" },
               ].map((item, i) => (
-                <li key={i} className="hover:text-green-500 cursor-pointer">
-                  {item}
+                <li key={i}>
+                  <Link to={item.link} className="hover:text-green-500">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* PARTNER */}
-          <div>
-            <h4 className="font-bold mb-3">Partner</h4>
-            <ul className="space-y-2 text-sm text-gray-600">
-              {["Become Seller", "Affiliate", "Advertise", "Partnership"].map(
-                (item, i) => (
-                  <li key={i} className="hover:text-green-500 cursor-pointer">
-                    {item}
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        </div>
-
-        {/* SUBSCRIBE */}
-        <div className="mt-10 border-t pt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-          <div>
-            <h4 className="font-bold">
-              Subscribe & get <span className="text-red-500">10% off</span> for your first order
-            </h4>
+          {/* SUBSCRIBE */}
+          <div className="mt-4">
+            <h4 className="font-bold mb-3">Subscribe</h4>
             <p className="text-sm text-gray-500">
-              By subscribing, you agree to our Policy
+              Get 10% off for your first order
             </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 mt-3">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 border rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-green-500"
+              />
+              <button className="bg-green-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-600 transition">
+                Subscribe
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="flex-1 border rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-green-500"
-            />
-            <button className="bg-green-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-600 transition">
-              Subscribe
-            </button>
-          </div>
         </div>
 
         {/* BOTTOM */}
@@ -138,7 +103,9 @@ const Footer = () => {
             ))}
           </div>
 
-          <span className="hover:text-green-500 cursor-pointer">Mobile Site</span>
+          <span className="hover:text-green-500 cursor-pointer">
+            Mobile Site
+          </span>
         </div>
       </div>
     </footer>
