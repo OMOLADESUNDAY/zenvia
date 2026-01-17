@@ -6,7 +6,7 @@ import useAuthStore from "../../store/useAuthStore";
 import axios from "axios";
 import Modal from "../../components/common/Modal";
 import Navbar from "../../components/common/Navbar";
-
+import Dashboard from "../../components/admin/Dashboard";
 /* ---------------- Admin Tab Components ---------------- */
 const AdminsTab = () => <div>Admins Management Here</div>;
 const ProductsTab = () => <div>Products Management Here</div>;
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   const logout = useAuthStore((state) => state.logout);
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("admins");
+  const [activeTab, setActiveTab] = useState("dashboard");
   const handleLogout = () => {
     logout();
     navigate("/login");
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
         <div className="flex flex-col md:flex-row">
           {/* Sidebar */}
           <aside className="w-full  md:w-1/4 border-b md:border-b-0 md:border-r p-6 flex flex-col justify-between">
-            <div className=" max-h-96 overflow-auto">
+            <div className="max-h-105 overflow-y-auto custom-scrollbar pr-2">
               {/* Profile Info */}
               <div className="flex flex-col items-center text-center">
                 <img
@@ -62,11 +62,16 @@ const AdminDashboard = () => {
                   className="h-24 w-24 rounded-full bg-gray-200"
                 />
                 <h2 className="mt-4 text-lg font-semibold">Admin</h2>
-                <p className="text-sm text-gray-500">admin@gmail.com</p>
+                <p className="text-sm text-gray-500">{user.email}</p>
               </div>
 
               {/* Navigation */}
               <nav className="mt-8 space-y-2">
+                  <SidebarButton
+                  active={activeTab === "dashboard"}
+                  onClick={() => setActiveTab("dashboard")}
+                  label="Dashboard"
+                />
                 <SidebarButton
                   active={activeTab === "admins"}
                   onClick={() => setActiveTab("admins")}
@@ -102,11 +107,7 @@ const AdminDashboard = () => {
                   onClick={() => setActiveTab("shipping")}
                   label="Shipping"
                 />
-                <SidebarButton
-                  active={activeTab === "reports"}
-                  onClick={() => setActiveTab("reports")}
-                  label="Reports"
-                />
+              
                 <SidebarButton
                   active={activeTab === "cart"}
                   onClick={() => setActiveTab("cart")}
@@ -134,7 +135,7 @@ const AdminDashboard = () => {
             {activeTab === "orders" && <OrdersTab />}
             {activeTab === "payments" && <PaymentsTab />}
             {activeTab === "shipping" && <ShippingTab />}
-            {activeTab === "reports" && <ReportsTab />}
+            {activeTab === "dashboard" && <Dashboard />}
             {activeTab === "cart" && <CartTab />}
           </main>
         </div>
