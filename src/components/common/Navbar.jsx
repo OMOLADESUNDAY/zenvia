@@ -79,7 +79,7 @@ const Navbar = () => {
             </li>
 
             <li className="relative group">
-              <Link to="/pages" className="flex items-center gap-1">
+              <Link to="/" className="flex items-center gap-1">
                 Pages <ChevronDown className="w-4 h-4" />
               </Link>
               <ul className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all">

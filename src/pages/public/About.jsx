@@ -1,5 +1,5 @@
 import React from "react";
-
+import CEO from "../../assets/about image.png"
 export default function About() {
   return (
     <div className="bg-gray-50">
@@ -109,10 +109,10 @@ export default function About() {
           <h2 className="text-xl font-semibold mb-8">Leaderships</h2>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-            <Leader name="Henry Avery" role="CEO" />
-            <Leader name="Michael Edward" role="CTO" />
-            <Leader name="Ethan Howard" role="COO" />
-            <Leader name="Nathan Drake" role="Head of Sales" />
+            <Leader name="Omolade Sunday" role="CEO" />
+            <Leader name="Omolade Sunday" role="CTO" />
+            <Leader name="Omolade Sunday" role="COO" />
+            <Leader name="Omolade Sunday" role="Head of Sales" />
           </div>
         </div>
       </section>
@@ -153,9 +153,9 @@ function Leader({ name, role }) {
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden">
       <img
-        src="https://i.pravatar.cc/300"
+        src={CEO}
         alt={name}
-        className="h-56 w-full object-cover"
+        className="h-56 w-full object-cover object-top"
       />
       <div className="p-4">
         <h3 className="font-semibold">{name}</h3>
