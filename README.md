@@ -1,6 +1,6 @@
 # Zenvia Frontend
 
-Zenvia is a modern, responsive frontend application built with **React** and **Vite**, focused on delivering a fast, clean, and scalable user experience.
+Zenvia is a modern, responsive ecommerce frontend application built with **React** and **Vite**, focused on delivering a fast, clean, and scalable user experience.
 
 ---
 
@@ -38,9 +38,28 @@ Vite enables fast development and build times, while React provides a component-
 
 1. Clone the repository:
 
-   ```bash
+   ```
    git clone https://github.com/OMOLADESUNDAY/zenvia.git
-2.  Navigate into the project directory
+   ```
+2.  Installing Dependencies:
    
-   ```bash
-    cd zenvia-frontend
+   ```
+   npm install
+   ```
+3.  Start the development server:
+   
+   ```
+   npm run dev
+   ```
+4.  The application will run at:
+   
+   ```
+  http://localhost:5173
+   ```
+Check the fullstack it out on [zenvia.netlify.app](https://zenvia.netlify.app)
+
+# 👤 Author
+
+###  Omolade Sunday
+###  Full-Stack Developer
+###  Focused on building performant and scalable web interfaces.
