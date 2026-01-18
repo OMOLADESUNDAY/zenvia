@@ -41,5 +41,6 @@ Vite enables fast development and build times, while React provides a component-
    ```bash
    git clone https://github.com/OMOLADESUNDAY/zenvia.git
 2.  Navigate into the project directory
+   
    ```bash
     cd zenvia-frontend
